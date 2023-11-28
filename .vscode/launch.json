@@ -9,7 +9,7 @@
       "cwd": "dio_first_project",
       "request": "launch",
       "type": "dart",
-      "program": "../dart/meu_app/bin/meu_app.dart"
+      "program": "../dart/meu_app/funcoes/calculadora.dart"
     },
     {
       "name": "dio_first_project (profile mode)",
