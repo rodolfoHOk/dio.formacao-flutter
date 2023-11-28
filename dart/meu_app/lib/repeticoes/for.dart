@@ -1,10 +1,30 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:meu_app/meu_app.dart' as meu_app;
-
 void main(List<String> arguments) {
-  print('Hello world - ${meu_app.calculate()}!');
+  for (var i = 0; i <= 99; i++) {
+    print(i);
+  }
+
+  var texto = "Meu primeiro bloco for";
+  for (var i = 0; i < texto.length; i++) {
+    print(texto[i]);
+  }
+
+  for (var i = 0; i <= texto.length - 1; i++) {
+    print(texto[i]);
+  }
+
+  var listaNome = ["Danilo", "Rodolfo", "Mariana"];
+  for (var i = 0; i < listaNome.length; i++) {
+    print(listaNome[i]);
+  }
+
+  var result = 0;
+  for (var i = 1; i <= 100; i++) {
+    result = result + i;
+    print("$i - $result");
+  }
 
   var resultado = 0;
   var quantidade = 0;
