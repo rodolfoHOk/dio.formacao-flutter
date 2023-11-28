@@ -21,3 +21,7 @@
 - extension: dart-code.dart-code
 
 - extension: dart-code.flutter
+
+## Guia
+
+- criar app flutter: flutter create -t app --org br.com.hioktec.dioapp -a kotlin -i swift dio_first_project
