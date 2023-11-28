@@ -8,7 +8,8 @@
       "name": "dio_first_project",
       "cwd": "dio_first_project",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "program": "../dart/meu_app/bin/meu_app.dart"
     },
     {
       "name": "dio_first_project (profile mode)",

@@ -25,3 +25,13 @@
 ## Guia
 
 - criar app flutter: flutter create -t app --org br.com.hioktec.dioapp -a kotlin -i swift dio_first_project
+
+- rodar: flutter run
+
+## Linguagem Dart
+
+- [PDF: Linguagem de programação Dart](files/Linguagem%20de%20Programação%20Dart.pdf)
+
+- criar app dart: dart create -t console meu_app
+
+- rodar: dart run
