@@ -1,11 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:meu_app/meu_app.dart' as meu_app;
-
 void main(List<String> arguments) {
-  print('Hello world - ${meu_app.calculate()}!');
-
   print("Informe a primeira nota:");
   var line = stdin.readLineSync(encoding: utf8);
   var prova1 = int.parse(line ?? "0");
