@@ -1,10 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:meu_app/meu_app.dart' as meu_app;
-
 void main(List<String> arguments) {
-  print('Hello world - ${meu_app.calculate()}!');
+  var contador = 0;
+  var total = 10;
+
+  while (contador < total) {
+    contador = contador + 1;
+    print(contador);
+  }
 
   print("Digite um número ou 'S' para sair");
   var line = stdin.readLineSync(encoding: utf8);
