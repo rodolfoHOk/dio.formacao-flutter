@@ -1,6 +1,13 @@
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'package:tests_app/classes/viacep.dart';
 import 'package:tests_app/tests_app.dart' as app;
 import 'package:test/test.dart';
 
+import 'mock_viacep.dart';
+import 'tests_app_test.mocks.dart';
+
+@GenerateMocks([MockViaCEP])
 void main() {
   test('Calcula o valor do produto com desconto sem porcentagem', () {
     expect(app.calcularDesconto(1000, 150, false), equals(850));
@@ -81,5 +88,34 @@ void main() {
 
   test('Valor diferente', () {
     expect(app.retornaValor(50), isNot(equals(49)));
+  });
+
+  test('Retornar CEP', () async {
+    ViaCEP viaCEP = ViaCEP();
+    var response = await viaCEP.retornarCep("01001000");
+    expect(response["bairro"], equals("Sé"));
+    expect(response["logradouro"], equals("Praça da Sé"));
+  });
+
+  test('Retornar CEP with Mock', () async {
+    MockMockViaCEP mockMockViaCEP = MockMockViaCEP();
+
+    when(mockMockViaCEP.retornarCep("01001000"))
+        .thenAnswer((realInvocation) => Future.value({
+              "cep": "01001-000",
+              "logradouro": "Praça da Sé",
+              "complemento": "lado ímpar",
+              "bairro": "Sé",
+              "localidade": "São Paulo",
+              "uf": "SP",
+              "ibge": "3550308",
+              "gia": "1004",
+              "ddd": "11",
+              "siafi": "7107"
+            }));
+
+    var body = await mockMockViaCEP.retornarCep("01001000");
+    expect(body["bairro"], equals("Sé"));
+    expect(body["logradouro"], equals("Praça da Sé"));
   });
 }

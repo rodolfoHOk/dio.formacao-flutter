@@ -36,8 +36,16 @@
 
 - rodar: dart run
 
-- [Dark lint](https://pub.dev/packages/lint)
+- [Dart lint](https://pub.dev/packages/lint)
 
 - [Flutter lints](https://pub.dev/packages/flutter_lints)
 
 - [Test Matchers](/dart/tests_app/matchers.md)
+
+- [Dart Http](https://pub.dev/packages/http)
+
+- [Dart Mockito](https://pub.dev/packages/mockito)
+
+- [Dart Build Runner](https://pub.dev/packages/build_runner)
+
+- gerar mock: dart run build_runner build --delete-conflicting-outputs
