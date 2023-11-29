@@ -1,4 +1,4 @@
-class Pessoa {
+abstract class Pessoa {
   String _nome = "";
   String _endereco = "";
 
