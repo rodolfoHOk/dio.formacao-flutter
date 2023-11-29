@@ -1,10 +1,15 @@
+import 'package:poo_app/enum/tipo_notificacao.dart';
+
 abstract class Pessoa {
   String _nome = "";
   String _endereco = "";
+  TipoNotificacao _tipoNotificacao = TipoNotificacao.NENHUM;
 
-  Pessoa(String nome, String endereco) {
+  Pessoa(String nome, String endereco,
+      {TipoNotificacao tipoNotificacao = TipoNotificacao.NENHUM}) {
     _nome = nome;
     _endereco = endereco;
+    _tipoNotificacao = tipoNotificacao;
   }
 
   void setNome(String nome) {
@@ -23,8 +28,20 @@ abstract class Pessoa {
     return _endereco;
   }
 
+  void setTipoNotificacao(TipoNotificacao tipoNotificacao) {
+    _tipoNotificacao = tipoNotificacao;
+  }
+
+  TipoNotificacao getTipoNotificacao() {
+    return _tipoNotificacao;
+  }
+
   @override
   String toString() {
-    return {"Nome": _nome, "Endereço": _endereco}.toString();
+    return {
+      "Nome": _nome,
+      "Endereço": _endereco,
+      "TipoNotificacao": _tipoNotificacao
+    }.toString();
   }
 }
