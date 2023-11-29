@@ -1,15 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
+import 'package:exception_app/exception_app.dart' as exception_app;
 
 void main(List<String> arguments) {
-  print("Digite um número:");
-  var line = stdin.readLineSync(encoding: utf8);
-  try {
-    double numero = double.parse(line ?? "");
-    print(numero);
-  } catch (e) {
-    print("Número invalido: $line");
-  } finally {
-    print("Fim");
-  }
+  exception_app.execute();
 }
