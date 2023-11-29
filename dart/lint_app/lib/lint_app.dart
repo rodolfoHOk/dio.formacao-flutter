@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:exception_app/exception/nome_invalido_exception.dart';
-import 'package:exception_app/models/aluno.dart';
-import 'package:exception_app/utils/console_utils.dart';
+import 'package:lint_app/exception/nome_invalido_exception.dart';
+import 'package:lint_app/models/aluno.dart';
+import 'package:lint_app/utils/console_utils.dart';
 
 void execute() {
   print("Bem vindo ao sistema de notas!");
@@ -11,15 +11,14 @@ void execute() {
     if (nome.trim() == "") {
       throw NomeInvalidoException();
     }
-  } catch (NomeInvalidoException) {
+  } on NomeInvalidoException {
     // nome = "Nome Padrão";
     print(NomeInvalidoException);
     exit(0);
+  } catch (e) {
+    print(e);
+    exit(0);
   }
-  // catch (e) {
-  //   print(e);
-  //   exit(0);
-  // }
   var aluno = Aluno(nome);
 
   double? nota;

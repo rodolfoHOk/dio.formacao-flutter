@@ -35,3 +35,7 @@
 - criar app dart: dart create -t console meu_app
 
 - rodar: dart run
+
+- [Dark lint](https://pub.dev/packages/lint)
+
+- [Flutter lints](https://pub.dev/packages/flutter_lints)
