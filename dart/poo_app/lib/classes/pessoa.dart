@@ -17,4 +17,9 @@ class Pessoa {
   String getEndereco() {
     return _endereco;
   }
+
+  @override
+  String toString() {
+    return {"Nome": _nome, "Endereço": _endereco}.toString();
+  }
 }

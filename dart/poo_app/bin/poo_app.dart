@@ -5,5 +5,4 @@ void main(List<String> arguments) {
   p1.setNome("Rodolfo");
   p1.setEndereco("Rua 1, 1");
   print(p1);
-  print(p1.getNome());
 }
