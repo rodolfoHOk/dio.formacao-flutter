@@ -1,12 +1,12 @@
-import 'package:tests_app/tests_app.dart';
+import 'package:tests_app/tests_app.dart' as app;
 import 'package:test/test.dart';
 
 void main() {
-  test('calculate', () {
-    expect(calculate(), 42);
+  test('Calcula o valor do produto com desconto sem porcentagem', () {
+    expect(app.calcularDesconto(1000, 150, false), 850);
   });
 
-  test('calculate1', () {
-    expect(calculate(), greaterThan(41));
+  test('Calcula o valor do produto com desconto por porcentagem', () {
+    expect(app.calcularDesconto(1000, 15, true), equals(850));
   });
 }
