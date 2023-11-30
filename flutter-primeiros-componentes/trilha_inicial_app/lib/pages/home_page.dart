@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var generatedNumber = 0;
+  var clicksQuantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +24,24 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: Center(
-          child: Text(
-        generatedNumber.toString(),
-        style: const TextStyle(fontSize: 20),
-        // style: GoogleFonts.acme(fontSize: 20),
-      )),
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Center(
+            child: Text(
+          "Foi clicado $clicksQuantity vezes",
+          style: const TextStyle(fontSize: 20),
+        )),
+        Center(
+            child: Text(
+          "O número gerado foi: $generatedNumber",
+          style: const TextStyle(fontSize: 20),
+        ))
+      ]),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red.shade300,
         child: const Icon(Icons.add_reaction),
         onPressed: () {
           setState(() {
+            clicksQuantity = clicksQuantity + 1;
             generatedNumber =
                 RandomNumberGeneratorService.generateRandomNumber(1000);
           });
