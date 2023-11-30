@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:trilha_inicial_app/services/random_number_generator_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,10 +17,18 @@ class _HomePageState extends State<HomePage> {
     debugPrint("chamando método build");
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Meu App"),
+        title: Text(
+          "Meu App",
+          style: GoogleFonts.pacifico(),
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: Center(child: Text(generatedNumber.toString())),
+      body: Center(
+          child: Text(
+        generatedNumber.toString(),
+        style: const TextStyle(fontSize: 20),
+        // style: GoogleFonts.acme(fontSize: 20),
+      )),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red.shade300,
         child: const Icon(Icons.add_reaction),

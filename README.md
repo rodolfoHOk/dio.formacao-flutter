@@ -53,3 +53,6 @@
 ## Flutter
 
 - criar um app flutter: flutter create -t app -a kotlin -i swift --org br.com.hioktec.trilhaapp trilha_inicial_app
+
+- [Flutter Google Fonts](https://pub.dev/packages/google_fonts)
+
