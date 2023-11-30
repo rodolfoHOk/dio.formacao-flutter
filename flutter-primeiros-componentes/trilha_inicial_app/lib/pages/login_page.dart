@@ -22,33 +22,61 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 64,
             ),
-            Container(
-              width: 150,
-              height: 150,
-              color: Colors.amber,
+            const Icon(
+              Icons.person,
+              size: 150,
+              color: Colors.purple,
             ),
             const SizedBox(
               height: 48,
             ),
             Container(
-              width: double.maxFinite,
-              margin: const EdgeInsets.symmetric(horizontal: 30),
-              color: Colors.green,
-              height: 32,
-              alignment: Alignment.center,
-              child: const Text("Informe seu e-mail:"),
-            ),
+                width: double.maxFinite,
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                height: 32,
+                alignment: Alignment.center,
+                child: const Row(
+                  children: [
+                    Expanded(flex: 2, child: Text("Informe seu e-mail:")),
+                    Expanded(flex: 2, child: Text("E-mail"))
+                  ],
+                )),
             const SizedBox(
               height: 12,
             ),
+            Container(
+                width: double.maxFinite,
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                height: 32,
+                alignment: Alignment.center,
+                child: const Row(
+                  children: [
+                    Expanded(flex: 2, child: Text("Informe a senha:")),
+                    Expanded(flex: 2, child: Text("Senha"))
+                  ],
+                )),
+            Expanded(child: Container()),
             Container(
               width: double.maxFinite,
               margin: const EdgeInsets.symmetric(horizontal: 30),
               color: Colors.green,
               height: 32,
               alignment: Alignment.center,
-              child: const Text("Informe a senha:"),
-            )
+              child: const Text("Login"),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Container(
+              width: double.maxFinite,
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              height: 32,
+              alignment: Alignment.center,
+              child: const Text("Cadastro"),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
           ],
         ),
       ),
