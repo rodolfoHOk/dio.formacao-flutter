@@ -49,3 +49,7 @@
 - [Dart Build Runner](https://pub.dev/packages/build_runner)
 
 - gerar mock: dart run build_runner build --delete-conflicting-outputs
+
+## Flutter
+
+- criar um app flutter: flutter create -t app -a kotlin -i swift --org br.com.hioktec.trilhaapp trilha_inicial_app
