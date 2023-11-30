@@ -24,18 +24,29 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Center(
-            child: Text(
-          "Foi clicado $clicksQuantity vezes",
-          style: const TextStyle(fontSize: 20),
-        )),
-        Center(
-            child: Text(
-          "O número gerado foi: $generatedNumber",
-          style: const TextStyle(fontSize: 20),
-        ))
-      ]),
+      body: Container(
+        // margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        color: Colors.amber,
+        width: double.maxFinite,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                "Ações do usuário",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "Foi clicado $clicksQuantity vezes",
+                style: const TextStyle(fontSize: 20),
+              ),
+              Text(
+                "O número gerado foi: $generatedNumber",
+                style: const TextStyle(fontSize: 20),
+              )
+            ]),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red.shade300,
         child: const Icon(Icons.add_reaction),
