@@ -31,43 +31,71 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text(
-                "Ações do usuário",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Foi clicado $clicksQuantity vezes",
-                style: const TextStyle(fontSize: 20),
-              ),
-              Text(
-                "O número gerado foi: $generatedNumber",
-                style: const TextStyle(fontSize: 20),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    color: Colors.red,
-                    child: const Text(
-                      "10",
-                      style: TextStyle(fontSize: 20),
+              Expanded(
+                  child: Container(
+                width: double.maxFinite,
+                color: Colors.cyan,
+                child: const Text(
+                  "Ações do usuário",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              )),
+              Expanded(
+                  flex: 3,
+                  child: Container(
+                    width: double.maxFinite,
+                    color: Colors.orange,
+                    child: Text(
+                      "Foi clicado $clicksQuantity vezes",
+                      style: const TextStyle(fontSize: 20),
                     ),
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    child: const Text(
-                      "20",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.green,
-                    child: const Text(
-                      "30",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ],
+                  )),
+              Container(
+                width: double.maxFinite,
+                color: Colors.indigo,
+                child: Text(
+                  "O número gerado foi: $generatedNumber",
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                    color: Colors.grey,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: Container(
+                              // alignment: Alignment.center,
+                              color: Colors.red,
+                              child: const Text(
+                                "Nome:",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            )),
+                        Expanded(
+                            flex: 3,
+                            child: Container(
+                              // alignment: Alignment.center,
+                              color: Colors.blue,
+                              child: const Text(
+                                "Rodolfo HiOk",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            )),
+                        Expanded(
+                            flex: 2,
+                            child: Container(
+                              // alignment: Alignment.center,
+                              color: Colors.green,
+                              child: const Text(
+                                "30",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            )),
+                      ],
+                    )),
               )
             ]),
       ),
