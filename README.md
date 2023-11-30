@@ -4,7 +4,7 @@
 
 ## Introdução
 
-[Primeiros passos](/files/Primeiros%20Passos%20com%20Flutter.pptx)
+[PDF - Primeiros passos](/files/Primeiros%20Passos%20com%20Flutter.pdf)
 
 ## Links
 
@@ -56,3 +56,4 @@
 
 - [Flutter Google Fonts](https://pub.dev/packages/google_fonts)
 
+- [PDF: Flutter - Pages, Widgets, Navegação e Funções](files/Pages,%20Widgets,%20Navegação%20e%20Funções.pdf)
