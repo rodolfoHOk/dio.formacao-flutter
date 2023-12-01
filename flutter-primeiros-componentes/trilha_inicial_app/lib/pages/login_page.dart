@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,9 +8,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController =
-      TextEditingController(text: "text@email.com");
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController passwordController = TextEditingController(text: "");
   bool isObscureText = true;
 
   @override
@@ -134,8 +131,24 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.maxFinite,
                   child: TextButton(
                     onPressed: () {
-                      debugPrint(emailController.text);
-                      debugPrint(passwordController.text);
+                      if (emailController.text.trim() == "test@email.com" &&
+                          passwordController.text.trim() == "test123") {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  "Login efetuado com sucesso!",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  "Erro ao efetuar o login!",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )));
+                      }
                     },
                     style: ButtonStyle(
                         backgroundColor:
