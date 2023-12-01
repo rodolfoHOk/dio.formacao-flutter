@@ -10,16 +10,52 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Meu App",
-          style: TextStyle(color: Colors.white, fontSize: 20),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: const Text(
+            "Main Page",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
         ),
-        backgroundColor: Colors.red.shade300,
-        // iconTheme: const IconThemeData(color: Colors.white),
+        drawer: Drawer(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  child: Container(
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: const Text("Dados cadastrais")),
+                  onTap: () {},
+                ),
+                const Divider(),
+                SizedBox(height: 10, child: Container()),
+                InkWell(
+                  child: Container(
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: const Text("Termos de uso e privacidade")),
+                  onTap: () {},
+                ),
+                const Divider(),
+                SizedBox(height: 10, child: Container()),
+                InkWell(
+                  child: Container(
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: const Text("Configurações")),
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: const Center(child: Text("Página principal")),
       ),
-      body: const Center(child: Text("Página principal")),
     );
   }
 }
