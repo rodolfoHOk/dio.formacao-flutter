@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -8,6 +10,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var email = "";
+  var password = "";
+  bool isObscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -60,9 +66,12 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   height: 32,
                   alignment: Alignment.center,
-                  child: const TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                  child: TextField(
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(top: -4),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.purple)),
@@ -83,23 +92,37 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   height: 32,
                   alignment: Alignment.center,
-                  child: const TextField(
-                    style: TextStyle(color: Colors.white),
+                  child: TextField(
+                    obscureText: isObscureText,
+                    onChanged: (value) {
+                      password = value;
+                    },
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: -4),
-                      enabledBorder: UnderlineInputBorder(
+                      contentPadding: const EdgeInsets.only(top: -4),
+                      enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.purple)),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.purple)),
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.lock_outline,
                         color: Colors.purple,
                       ),
                       hintText: "Senha",
-                      hintStyle: TextStyle(color: Colors.white),
-                      suffixIcon: Icon(
-                        Icons.visibility_off,
-                        color: Colors.white,
+                      hintStyle: const TextStyle(color: Colors.white),
+                      // suffixIcon: GestureDetector(
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                        child: Icon(
+                          isObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   )),
@@ -113,7 +136,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                   width: double.maxFinite,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print(email);
+                      print(password);
+                    },
                     style: ButtonStyle(
                         backgroundColor:
                             const MaterialStatePropertyAll(Colors.purple),
