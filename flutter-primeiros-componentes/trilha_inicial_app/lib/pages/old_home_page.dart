@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trilha_inicial_app/services/random_number_generator_service.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class OldHomePage extends StatefulWidget {
+  const OldHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<OldHomePage> createState() => _OldHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _OldHomePageState extends State<OldHomePage> {
   var generatedNumber = 0;
   var clicksQuantity = 0;
 
