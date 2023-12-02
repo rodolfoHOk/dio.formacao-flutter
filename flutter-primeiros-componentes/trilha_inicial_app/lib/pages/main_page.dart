@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/pages/registration_data.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -30,7 +31,16 @@ class _MainPageState extends State<MainPage> {
                       width: double.maxFinite,
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: const Text("Dados cadastrais")),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegistrationDataPage(
+                                  text: "Meus dados",
+                                  data: ["Nome", "Endereço"],
+                                )));
+                  },
                 ),
                 const Divider(),
                 SizedBox(height: 10, child: Container()),
