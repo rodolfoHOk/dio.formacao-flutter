@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/pages/page1.dart';
+import 'package:trilha_inicial_app/pages/page2.dart';
+import 'package:trilha_inicial_app/pages/page3.dart';
 import 'package:trilha_inicial_app/pages/registration_data.dart';
 
 class MainPage extends StatefulWidget {
@@ -64,7 +67,15 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-        body: const Center(child: Text("Página principal")),
+        body: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                  // scrollDirection: Axis.vertical,
+                  children: const [Page1Page(), Page2Page(), Page3Page()]),
+            ),
+          ],
+        ),
       ),
     );
   }
