@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/repositories/level_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
 
 class RegistrationDataPage extends StatefulWidget {
@@ -11,15 +12,29 @@ class RegistrationDataPage extends StatefulWidget {
 class _RegistrationDataPageState extends State<RegistrationDataPage> {
   TextEditingController nameController = TextEditingController(text: "");
   TextEditingController birthdayController = TextEditingController(text: "");
-
   DateTime? birthday;
+  var levelRepository = LevelRepository();
+  var levels = [];
+  var selectedLevel = "";
 
-  // Text returnText(String text) {
-  //   return Text(
-  //     text,
-  //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-  //   );
-  // }
+  String getLevelTitle(String level) {
+    switch (level) {
+      case "beginner":
+        return "Iniciante";
+      case "intermediate":
+        return "Intermediário";
+      case "advanced":
+        return "Avançado";
+      default:
+        return "Nome do nível inválido";
+    }
+  }
+
+  @override
+  void initState() {
+    levels = levelRepository.returnLevels();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +51,10 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // returnText("Nome"),
             const TextLabel(text: "Nome"),
             TextField(
               controller: nameController,
             ),
-            const SizedBox(height: 12),
-            // returnText("Data de nascimento"),
             const TextLabel(text: "Data de nascimento"),
             TextField(
               readOnly: true,
@@ -59,7 +71,22 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                 }
               },
             ),
-            const SizedBox(height: 12),
+            const TextLabel(text: "Nível de experiência"),
+            Column(
+                children: levels
+                    .map((level) => RadioListTile(
+                        dense: true,
+                        activeColor: Colors.blue.shade600,
+                        title: Text(getLevelTitle(level.toString())),
+                        selected: selectedLevel == level.toString(),
+                        value: level.toString(),
+                        groupValue: selectedLevel,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedLevel = value.toString();
+                          });
+                        }))
+                    .toList()),
             TextButton(
                 onPressed: () {
                   debugPrint(nameController.text);
