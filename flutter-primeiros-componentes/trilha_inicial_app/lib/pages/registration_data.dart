@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
 
 class RegistrationDataPage extends StatefulWidget {
   const RegistrationDataPage({super.key});
@@ -9,6 +10,16 @@ class RegistrationDataPage extends StatefulWidget {
 
 class _RegistrationDataPageState extends State<RegistrationDataPage> {
   TextEditingController nameController = TextEditingController(text: "");
+  TextEditingController birthdayController = TextEditingController(text: "");
+
+  DateTime? birthday;
+
+  // Text returnText(String text) {
+  //   return Text(
+  //     text,
+  //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +36,34 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Nome",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-            ),
+            // returnText("Nome"),
+            const TextLabel(text: "Nome"),
             TextField(
               controller: nameController,
             ),
+            const SizedBox(height: 12),
+            // returnText("Data de nascimento"),
+            const TextLabel(text: "Data de nascimento"),
+            TextField(
+              readOnly: true,
+              controller: birthdayController,
+              onTap: () async {
+                var day = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime(2000, 1, 1),
+                    firstDate: DateTime(1900, 1, 1),
+                    lastDate: DateTime(2024, 12, 04));
+                if (day != null) {
+                  birthdayController.text = day.toString();
+                  birthday = day;
+                }
+              },
+            ),
+            const SizedBox(height: 12),
             TextButton(
                 onPressed: () {
                   debugPrint(nameController.text);
+                  debugPrint(birthday.toString());
                 },
                 child: const Text("Salvar"))
           ],
