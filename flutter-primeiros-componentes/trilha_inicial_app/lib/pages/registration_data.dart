@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/repositories/language_repository.dart';
 import 'package:trilha_inicial_app/repositories/level_repository.dart';
@@ -20,7 +22,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   var languageRepository = LanguageRepository();
   var languages = [];
   var selectedLanguages = [];
-  var chosenSalary = 0.0;
+  double chosenSalary = 0.0;
+  int experienceTime = 0;
 
   String getLevelTitle(String level) {
     switch (level) {
@@ -33,6 +36,17 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
       default:
         return "Nome do nível inválido";
     }
+  }
+
+  List<DropdownMenuItem<int>> getDropdownItens(int maxQuantity) {
+    var itens = <DropdownMenuItem<int>>[];
+    for (int i = 0; i <= maxQuantity; i++) {
+      itens.add(DropdownMenuItem(
+        value: i,
+        child: Text(i.toString()),
+      ));
+    }
+    return itens;
   }
 
   @override
@@ -111,6 +125,16 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           }
                         }))
                     .toList()),
+            const TextLabel(text: "Tempo de experiência"),
+            DropdownButton(
+                isExpanded: true,
+                value: experienceTime,
+                items: getDropdownItens(50),
+                onChanged: (value) {
+                  setState(() {
+                    experienceTime = value ?? 0;
+                  });
+                }),
             TextLabel(
                 text:
                     "Pretensão salarial. R\$ ${chosenSalary.round().toString()}"),
@@ -128,6 +152,10 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                 onPressed: () {
                   debugPrint(nameController.text);
                   debugPrint(birthday.toString());
+                  debugPrint(selectedLevel);
+                  debugPrint(selectedLanguages.toString());
+                  debugPrint(experienceTime.toString());
+                  debugPrint(chosenSalary.round().toString());
                 },
                 child: const Text("Salvar"))
           ],
