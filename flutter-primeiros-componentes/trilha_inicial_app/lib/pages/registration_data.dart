@@ -20,6 +20,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   var languageRepository = LanguageRepository();
   var languages = [];
   var selectedLanguages = [];
+  var chosenSalary = 0.0;
 
   String getLevelTitle(String level) {
     switch (level) {
@@ -110,6 +111,18 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           }
                         }))
                     .toList()),
+            TextLabel(
+                text:
+                    "Pretensão salarial. R\$ ${chosenSalary.round().toString()}"),
+            Slider(
+                min: 0,
+                max: 10000,
+                value: chosenSalary,
+                onChanged: (double value) {
+                  setState(() {
+                    chosenSalary = value;
+                  });
+                }),
             const SizedBox(height: 12),
             TextButton(
                 onPressed: () {
