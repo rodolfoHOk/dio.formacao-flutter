@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/repositories/language_repository.dart';
 import 'package:trilha_inicial_app/repositories/level_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
 
@@ -16,6 +17,9 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   var levelRepository = LevelRepository();
   var levels = [];
   var selectedLevel = "";
+  var languageRepository = LanguageRepository();
+  var languages = [];
+  var selectedLanguages = [];
 
   String getLevelTitle(String level) {
     switch (level) {
@@ -32,7 +36,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
 
   @override
   void initState() {
-    levels = levelRepository.returnLevels();
+    levels = levelRepository.getLevels();
+    languages = languageRepository.getLanguages();
     super.initState();
   }
 
@@ -48,8 +53,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             const TextLabel(text: "Nome"),
             TextField(
@@ -87,6 +91,26 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           });
                         }))
                     .toList()),
+            const TextLabel(text: "Linguagens preferidas"),
+            Column(
+                children: languages
+                    .map((language) => CheckboxListTile(
+                        dense: true,
+                        title: Text(language.toString()),
+                        value: selectedLanguages.contains(language),
+                        onChanged: (bool? value) {
+                          if (value!) {
+                            setState(() {
+                              selectedLanguages.add(language);
+                            });
+                          } else {
+                            setState(() {
+                              selectedLanguages.remove(language);
+                            });
+                          }
+                        }))
+                    .toList()),
+            const SizedBox(height: 12),
             TextButton(
                 onPressed: () {
                   debugPrint(nameController.text);

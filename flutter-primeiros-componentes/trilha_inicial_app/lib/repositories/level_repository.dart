@@ -1,5 +1,5 @@
 class LevelRepository {
-  List<String> returnLevels() {
+  List<String> getLevels() {
     return ["beginner", "intermediate", "advanced"];
   }
 }
