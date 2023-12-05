@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/card_page.dart';
-import 'package:trilha_inicial_app/pages/page2.dart';
+import 'package:trilha_inicial_app/pages/image_assets_page.dart';
 import 'package:trilha_inicial_app/pages/page3.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_drawer.dart';
@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> {
                     });
                   },
                   // scrollDirection: Axis.vertical,
-                  children: const [CardPage(), Page2Page(), Page3Page()]),
+                  children: const [CardPage(), ImageAssetsPage(), Page3Page()]),
             ),
             BottomNavigationBar(
                 onTap: (value) {
