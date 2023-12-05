@@ -13,9 +13,15 @@ class _TaskPageState extends State<TaskPage> {
   var taskRepository = TaskRepository();
   var descriptionController = TextEditingController(text: "");
   var _tasks = <Task>[];
+  var justNotCompleted = false;
 
   void fetchTasks() async {
-    _tasks = await taskRepository.list();
+    if (justNotCompleted) {
+      _tasks = await taskRepository.listNotCompleted();
+    } else {
+      _tasks = await taskRepository.list();
+    }
+    setState(() {});
   }
 
   @override
@@ -60,15 +66,54 @@ class _TaskPageState extends State<TaskPage> {
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
-      body: ListView.builder(
-          itemCount: _tasks.length,
-          itemBuilder: (BuildContext builder, int index) {
-            var task = _tasks[index];
-            return Text(
-              task.getDescription(),
-              style: const TextStyle(color: Colors.black),
-            );
-          }),
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Column(
+          children: [
+            Container(
+                margin: const EdgeInsets.fromLTRB(16, 12, 24, 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Apenas não concluídos",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Switch(
+                        value: justNotCompleted,
+                        onChanged: (bool value) {
+                          justNotCompleted = value;
+                          fetchTasks();
+                          setState(() {});
+                        })
+                  ],
+                )),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: _tasks.length,
+                  itemBuilder: (BuildContext builder, int index) {
+                    var task = _tasks[index];
+                    return Dismissible(
+                      key: Key(task.getId()),
+                      onDismissed: (DismissDirection direction) async {
+                        await taskRepository.remove(task.getId());
+                        fetchTasks();
+                      },
+                      child: ListTile(
+                        title: Text(task.getDescription()),
+                        trailing: Switch(
+                            onChanged: (bool value) async {
+                              await taskRepository.update(task.getId(), value);
+                              fetchTasks();
+                            },
+                            value: task.isCompleted()),
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
