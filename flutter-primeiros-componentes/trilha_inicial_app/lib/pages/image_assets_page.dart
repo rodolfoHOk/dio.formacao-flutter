@@ -11,33 +11,39 @@ class ImageAssetsPage extends StatefulWidget {
 class _ImageAssetsPageState extends State<ImageAssetsPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
+        const SizedBox(height: 8),
         Image.asset(
-          // "lib/images/user1.png",
           AppImages.user1,
           height: 56,
         ),
+        const SizedBox(height: 8),
         Image.asset(
           AppImages.user2,
           height: 56,
         ),
+        const SizedBox(height: 8),
         Image.asset(
           AppImages.user3,
           height: 56,
         ),
+        const SizedBox(height: 8),
         Image.asset(
           AppImages.paisagem1,
           width: double.maxFinite,
         ),
+        const SizedBox(height: 8),
         Image.asset(
           AppImages.paisagem2,
           width: double.maxFinite,
         ),
+        const SizedBox(height: 8),
         Image.asset(
           AppImages.paisagem3,
           width: double.maxFinite,
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
