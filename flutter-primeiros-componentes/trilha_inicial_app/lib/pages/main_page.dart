@@ -49,11 +49,11 @@ class _MainPageState extends State<MainPage> {
                 currentIndex: pagePosition,
                 items: const [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: "Card"),
+                      icon: Icon(Icons.fit_screen), label: "Card"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.menu_book), label: "Assets"),
+                      icon: Icon(Icons.photo_library), label: "Assets"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.build), label: "List V"),
+                      icon: Icon(Icons.list_alt), label: "List V"),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.list), label: "List H")
                 ])
