@@ -94,19 +94,19 @@ class _TaskPageState extends State<TaskPage> {
                   itemBuilder: (BuildContext builder, int index) {
                     var task = _tasks[index];
                     return Dismissible(
-                      key: Key(task.getId()),
+                      key: Key(task.id),
                       onDismissed: (DismissDirection direction) async {
-                        await taskRepository.remove(task.getId());
+                        await taskRepository.remove(task.id);
                         fetchTasks();
                       },
                       child: ListTile(
-                        title: Text(task.getDescription()),
+                        title: Text(task.description),
                         trailing: Switch(
                             onChanged: (bool value) async {
-                              await taskRepository.update(task.getId(), value);
+                              await taskRepository.update(task.id, value);
                               fetchTasks();
                             },
-                            value: task.isCompleted()),
+                            value: task.completed),
                       ),
                     );
                   }),
