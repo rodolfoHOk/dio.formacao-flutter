@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/card_page.dart';
 import 'package:trilha_inicial_app/pages/image_assets_page.dart';
-import 'package:trilha_inicial_app/pages/list_view_h_page.dart';
+import 'package:trilha_inicial_app/pages/list_view_horizontal_page.dart';
+import 'package:trilha_inicial_app/pages/list_view_page.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_drawer.dart';
 
@@ -36,21 +37,25 @@ class _MainPageState extends State<MainPage> {
                   children: const [
                     CardPage(),
                     ImageAssetsPage(),
-                    ListViewHPage()
+                    ListViewPage(),
+                    ListViewHorizontalPage()
                   ]),
             ),
             BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
                 onTap: (value) {
                   pageController.jumpToPage(value);
                 },
                 currentIndex: pagePosition,
                 items: const [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: "Card Page"),
+                      icon: Icon(Icons.home), label: "Card"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.menu_book), label: "Page 2"),
+                      icon: Icon(Icons.menu_book), label: "Assets"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.build), label: "Page 3"),
+                      icon: Icon(Icons.build), label: "List V"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.list), label: "List H")
                 ])
           ],
         ),
