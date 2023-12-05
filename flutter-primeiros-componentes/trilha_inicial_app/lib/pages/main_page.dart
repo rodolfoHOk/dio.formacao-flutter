@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/card_page.dart';
 import 'package:trilha_inicial_app/pages/page2.dart';
 import 'package:trilha_inicial_app/pages/page3.dart';
+import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -19,13 +20,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text(
-            "Main Page",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-        ),
+        appBar: const CustomAppBar(title: "Meu App"),
         drawer: const CustomDrawer(),
         body: Column(
           children: [
