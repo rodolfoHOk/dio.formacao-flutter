@@ -12,6 +12,17 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   var taskRepository = TaskRepository();
   var descriptionController = TextEditingController(text: "");
+  var _tasks = <Task>[];
+
+  void fetchTasks() async {
+    _tasks = await taskRepository.list();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchTasks();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +45,11 @@ class _TaskPageState extends State<TaskPage> {
                         },
                         child: const Text("Cancelar")),
                     TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           var task = Task(descriptionController.text, false);
-                          debugPrint(task.getId());
-                          debugPrint(task.getDescription());
-                          debugPrint(task.isCompleted().toString());
-                          // taskRepository.add(task);
+                          await taskRepository.add(task);
                           Navigator.pop(context);
+                          setState(() {});
                         },
                         child: const Text("Adicionar"))
                   ],
@@ -51,7 +60,15 @@ class _TaskPageState extends State<TaskPage> {
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
-      body: Container(),
+      body: ListView.builder(
+          itemCount: _tasks.length,
+          itemBuilder: (BuildContext builder, int index) {
+            var task = _tasks[index];
+            return Text(
+              task.getDescription(),
+              style: const TextStyle(color: Colors.black),
+            );
+          }),
     );
   }
 }
