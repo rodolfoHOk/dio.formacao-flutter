@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
+import 'package:trilha_inicial_app/pages/random_number_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -136,6 +137,27 @@ class CustomDrawer extends StatelessWidget {
                 )),
             onTap: () {},
           ),
+          const Divider(),
+          InkWell(
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.numbers),
+                      SizedBox(width: 8),
+                      Text("Gerador de números"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext builder) =>
+                            const RandomNumberPage()));
+              }),
           const Divider(),
           InkWell(
             child: Container(

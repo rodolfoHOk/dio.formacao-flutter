@@ -22,12 +22,6 @@
 
 - extension: dart-code.flutter
 
-## Guia
-
-- criar app flutter: flutter create -t app --org br.com.hioktec.dioapp -a kotlin -i swift dio_first_project
-
-- rodar: flutter run
-
 ## Linguagem Dart
 
 - [PDF: Linguagem de programação Dart](files/Linguagem%20de%20Programação%20Dart.pdf)
@@ -54,6 +48,14 @@
 
 - criar um app flutter: flutter create -t app -a kotlin -i swift --org br.com.hioktec.trilhaapp trilha_inicial_app
 
+- rodar app flutter: flutter run
+
 - [Flutter Google Fonts](https://pub.dev/packages/google_fonts)
 
 - [PDF: Flutter - Pages, Widgets, Navegação e Funções](files/Pages,%20Widgets,%20Navegação%20e%20Funções.pdf)
+
+- [PDF: Flutter - Persistência local de dados](files/Persistência%20local%20de%20dados.pdf)
+
+- [Flutter Shared Preferences](https://pub.dev/packages/shared_preferences)
+
+- instalar um dependência : flutter pub add shared_preferences
