@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilha_inicial_app/repositories/language_repository.dart';
 import 'package:trilha_inicial_app/repositories/level_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
@@ -19,9 +20,20 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   var selectedLevel = "";
   var languageRepository = LanguageRepository();
   var languages = [];
-  var selectedLanguages = [];
+  var selectedLanguages = <String>[];
   double chosenSalary = 0.0;
   int experienceTime = 0;
+
+  late SharedPreferences storage;
+  final String REGISTRATION_DATA_NAME_KEY = "registration_data_name_key";
+  final String REGISTRATION_DATA_BIRTHDAY = "registration_data_birthday_key";
+  final String REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY =
+      "registration_data_experience_levels_key";
+  final String REGISTRATION_DATA_LANGUAGES_KEY =
+      "registration_data_languages_key";
+  final String REGISTRATION_DATA_EXPERIENCE_TIME_KEY =
+      "registration_data_experience_time_key";
+  final String REGISTRATION_DATA_SALARY_KEY = "registration_data_salary_key";
 
   bool saving = false;
 
@@ -49,11 +61,30 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
     return itens;
   }
 
+  void loadData() async {
+    storage = await SharedPreferences.getInstance();
+    setState(() {
+      nameController.text = storage.getString(REGISTRATION_DATA_NAME_KEY) ?? "";
+      birthday = DateTime.tryParse(
+              storage.getString(REGISTRATION_DATA_BIRTHDAY) ?? "") ??
+          DateTime.now();
+      birthdayController.text = birthday!.toIso8601String();
+      selectedLevel =
+          storage.getString(REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY) ?? "";
+      selectedLanguages =
+          storage.getStringList(REGISTRATION_DATA_LANGUAGES_KEY) ?? [];
+      experienceTime =
+          storage.getInt(REGISTRATION_DATA_EXPERIENCE_TIME_KEY) ?? 0;
+      chosenSalary = storage.getDouble(REGISTRATION_DATA_SALARY_KEY) ?? 0.0;
+    });
+  }
+
   @override
   void initState() {
+    super.initState();
     levels = levelRepository.getLevels();
     languages = languageRepository.getLanguages();
-    super.initState();
+    loadData();
   }
 
   @override
@@ -151,7 +182,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                       }),
                   const SizedBox(height: 12),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (nameController.text.trim().length < 3) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -212,6 +243,21 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                               backgroundColor: Colors.red));
                           return;
                         }
+
+                        await storage.setString(
+                            REGISTRATION_DATA_NAME_KEY, nameController.text);
+                        await storage.setString(REGISTRATION_DATA_BIRTHDAY,
+                            birthday!.toIso8601String());
+                        await storage.setString(
+                            REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY,
+                            selectedLevel);
+                        await storage.setStringList(
+                            REGISTRATION_DATA_LANGUAGES_KEY, selectedLanguages);
+                        await storage.setInt(
+                            REGISTRATION_DATA_EXPERIENCE_TIME_KEY,
+                            experienceTime);
+                        await storage.setDouble(
+                            REGISTRATION_DATA_SALARY_KEY, chosenSalary);
 
                         setState(() {
                           saving = true;
