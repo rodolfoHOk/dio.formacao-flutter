@@ -26,7 +26,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
 
   late SharedPreferences storage;
   final String REGISTRATION_DATA_NAME_KEY = "registration_data_name_key";
-  final String REGISTRATION_DATA_BIRTHDAY = "registration_data_birthday_key";
+  final String REGISTRATION_DATA_BIRTHDAY_KEY =
+      "registration_data_birthday_key";
   final String REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY =
       "registration_data_experience_levels_key";
   final String REGISTRATION_DATA_LANGUAGES_KEY =
@@ -66,7 +67,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
     setState(() {
       nameController.text = storage.getString(REGISTRATION_DATA_NAME_KEY) ?? "";
       birthday = DateTime.tryParse(
-              storage.getString(REGISTRATION_DATA_BIRTHDAY) ?? "") ??
+              storage.getString(REGISTRATION_DATA_BIRTHDAY_KEY) ?? "") ??
           DateTime.now();
       birthdayController.text = birthday!.toIso8601String();
       selectedLevel =
@@ -246,7 +247,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
 
                         await storage.setString(
                             REGISTRATION_DATA_NAME_KEY, nameController.text);
-                        await storage.setString(REGISTRATION_DATA_BIRTHDAY,
+                        await storage.setString(REGISTRATION_DATA_BIRTHDAY_KEY,
                             birthday!.toIso8601String());
                         await storage.setString(
                             REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY,
