@@ -11,7 +11,9 @@ enum StorageKeys {
   CONFIGURATION_USERNAME_KEY,
   CONFIGURATION_HEIGHT_KEY,
   CONFIGURATION_RECEIVE_NOTIFICATION_KEY,
-  CONFIGURATION_DARK_THEME_KEY
+  CONFIGURATION_DARK_THEME_KEY,
+  RANDOM_NUMBER_RANDOM_NUMBER_KEY,
+  RANDOM_NUMBER_CLICK_COUNTER_KEY
 }
 
 class AppStorageService {
@@ -37,6 +39,27 @@ class AppStorageService {
             StorageKeys.REGISTRATION_DATA_BIRTHDAY_KEY.toString())) ??
         DateTime.now();
   }
+
+  Future<bool> setRandomNumber(int randomNumber) {
+    return _setInt(
+        StorageKeys.RANDOM_NUMBER_RANDOM_NUMBER_KEY.toString(), randomNumber);
+  }
+
+  int getRandomNumber() {
+    return _getInt(StorageKeys.RANDOM_NUMBER_RANDOM_NUMBER_KEY.toString());
+  }
+
+  Future<bool> setClickCounter(int clickCount) {
+    return _setInt(
+        StorageKeys.RANDOM_NUMBER_CLICK_COUNTER_KEY.toString(), clickCount);
+  }
+
+  int getClickCounter() {
+    return _getInt(StorageKeys.RANDOM_NUMBER_CLICK_COUNTER_KEY.toString());
+  }
+
+  // generatedNumber = storage.getInt(RANDOM_NUMBER_KEY) ?? 0;
+  //     clickCounter = storage.getInt(CLICK_COUNTER_KEY) ?? 0;
 
   Future<bool> setRegistrationDataExperienceLevel(String level) async {
     return _setString(

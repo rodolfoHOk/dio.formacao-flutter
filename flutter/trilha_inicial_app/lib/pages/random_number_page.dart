@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trilha_inicial_app/services/app_storage_service.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
 class RandomNumberPage extends StatefulWidget {
@@ -15,25 +16,21 @@ class _RandomNumberPageState extends State<RandomNumberPage> {
   int generatedNumber = 0;
   int clickCounter = 0;
 
-  // ignore: non_constant_identifier_names
-  final RANDOM_NUMBER_KEY = "random_number";
-  // ignore: non_constant_identifier_names
-  final CLICK_COUNTER_KEY = "click_counter";
+  late AppStorageService appStorageService;
 
-  late SharedPreferences storage;
-
-  void fetchData() async {
-    storage = await SharedPreferences.getInstance();
+  void loadData() async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    appStorageService = AppStorageService(sharedPreferences);
     setState(() {
-      generatedNumber = storage.getInt(RANDOM_NUMBER_KEY) ?? 0;
-      clickCounter = storage.getInt(CLICK_COUNTER_KEY) ?? 0;
+      generatedNumber = appStorageService.getRandomNumber();
+      clickCounter = appStorageService.getClickCounter();
     });
   }
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    loadData();
   }
 
   @override
@@ -62,9 +59,8 @@ class _RandomNumberPageState extends State<RandomNumberPage> {
               generatedNumber = random.nextInt(1000);
               clickCounter = clickCounter + 1;
             });
-            await storage.setInt(RANDOM_NUMBER_KEY, generatedNumber);
-            await storage.setInt(CLICK_COUNTER_KEY, clickCounter);
-            // storage.remove(randomNumberKey); // for teste 0
+            await appStorageService.setRandomNumber(generatedNumber);
+            await appStorageService.setClickCounter(clickCounter);
           },
           child: const Icon(Icons.add_rounded),
         ),
