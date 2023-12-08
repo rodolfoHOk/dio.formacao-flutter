@@ -7,115 +7,151 @@ enum StorageKeys {
   REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY,
   REGISTRATION_DATA_LANGUAGES_KEY,
   REGISTRATION_DATA_EXPERIENCE_TIME_KEY,
-  REGISTRATION_DATA_SALARY_KEY
+  REGISTRATION_DATA_SALARY_KEY,
+  CONFIGURATION_USERNAME_KEY,
+  CONFIGURATION_HEIGHT_KEY,
+  CONFIGURATION_RECEIVE_NOTIFICATION_KEY,
+  CONFIGURATION_DARK_THEME_KEY
 }
 
 class AppStorageService {
   SharedPreferences? storage;
 
-  void initStorage() async {
-    storage = await SharedPreferences.getInstance();
+  AppStorageService(this.storage);
+
+  Future<bool> setRegistrationDataName(String name) async {
+    return _setString(StorageKeys.REGISTRATION_DATA_NAME_KEY.toString(), name);
   }
 
-  AppStorageService() {
-    initStorage();
-  }
-
-  void setRegistrationDataName(String name) async {
-    _setString(StorageKeys.REGISTRATION_DATA_NAME_KEY.toString(), name);
-  }
-
-  Future<String> getRegistrationDataName() async {
+  String getRegistrationDataName() {
     return _getString(StorageKeys.REGISTRATION_DATA_NAME_KEY.toString());
   }
 
-  void setRegistrationDataBirthday(DateTime birthday) async {
-    _setString(StorageKeys.REGISTRATION_DATA_BIRTHDAY_KEY.toString(),
+  Future<bool> setRegistrationDataBirthday(DateTime birthday) async {
+    return _setString(StorageKeys.REGISTRATION_DATA_BIRTHDAY_KEY.toString(),
         birthday.toIso8601String());
   }
 
-  Future<DateTime> getRegistrationDataBirthday() async {
-    return DateTime.tryParse(await _getString(
+  DateTime getRegistrationDataBirthday() {
+    return DateTime.tryParse(_getString(
             StorageKeys.REGISTRATION_DATA_BIRTHDAY_KEY.toString())) ??
         DateTime.now();
   }
 
-  void setRegistrationDataExperienceLevel(String level) async {
-    _setString(
+  Future<bool> setRegistrationDataExperienceLevel(String level) async {
+    return _setString(
         StorageKeys.REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY.toString(), level);
   }
 
-  Future<String> getRegistrationDataExperienceLevel() async {
+  String getRegistrationDataExperienceLevel() {
     return _getString(
         StorageKeys.REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY.toString());
   }
 
-  void setRegistrationDataLanguages(List<String> languages) async {
-    _setStringList(
+  Future<bool> setRegistrationDataLanguages(List<String> languages) async {
+    return _setStringList(
         StorageKeys.REGISTRATION_DATA_LANGUAGES_KEY.toString(), languages);
   }
 
-  Future<List<String>> getRegistrationDataLanguages() async {
+  List<String> getRegistrationDataLanguages() {
     return _getStringList(
         StorageKeys.REGISTRATION_DATA_LANGUAGES_KEY.toString());
   }
 
-  void setRegistrationDataExperienceTime(int experienceTime) async {
-    _setInt(StorageKeys.REGISTRATION_DATA_EXPERIENCE_TIME_KEY.toString(),
+  Future<bool> setRegistrationDataExperienceTime(int experienceTime) async {
+    return _setInt(StorageKeys.REGISTRATION_DATA_EXPERIENCE_TIME_KEY.toString(),
         experienceTime);
   }
 
-  Future<int> getRegistrationDataExperienceTime() async {
+  int getRegistrationDataExperienceTime() {
     return _getInt(
         StorageKeys.REGISTRATION_DATA_EXPERIENCE_TIME_KEY.toString());
   }
 
-  void setRegistrationDataSalary(double chosenSalary) async {
-    _setDouble(
+  Future<bool> setRegistrationDataSalary(double chosenSalary) async {
+    return _setDouble(
         StorageKeys.REGISTRATION_DATA_SALARY_KEY.toString(), chosenSalary);
   }
 
-  Future<double> getRegistrationDataSalary() async {
+  double getRegistrationDataSalary() {
     return _getDouble(StorageKeys.REGISTRATION_DATA_SALARY_KEY.toString());
   }
 
-  void _setString(String key, String value) async {
-    await storage!.setString(key, value);
+  Future<bool> setConfigurationUsername(String username) async {
+    return _setString(
+        StorageKeys.CONFIGURATION_USERNAME_KEY.toString(), username);
   }
 
-  Future<String> _getString(String key) async {
+  String getConfigurationUsername() {
+    return _getString(StorageKeys.CONFIGURATION_USERNAME_KEY.toString());
+  }
+
+  Future<bool> setConfigurationHeight(double height) async {
+    return _setDouble(StorageKeys.CONFIGURATION_HEIGHT_KEY.toString(), height);
+  }
+
+  double getConfigurationHeight() {
+    return _getDouble(StorageKeys.CONFIGURATION_HEIGHT_KEY.toString());
+  }
+
+  Future<bool> setConfigurationReceiveNotification(
+      bool receivePushNotification) async {
+    return _setBool(
+        StorageKeys.CONFIGURATION_RECEIVE_NOTIFICATION_KEY.toString(),
+        receivePushNotification);
+  }
+
+  bool getConfigurationReceiveNotification() {
+    return _getBoll(
+        StorageKeys.CONFIGURATION_RECEIVE_NOTIFICATION_KEY.toString());
+  }
+
+  Future<bool> setConfigurationDarkTheme(bool darkTheme) async {
+    return _setBool(
+        StorageKeys.CONFIGURATION_DARK_THEME_KEY.toString(), darkTheme);
+  }
+
+  bool getConfigurationDarkTheme() {
+    return _getBoll(StorageKeys.CONFIGURATION_DARK_THEME_KEY.toString());
+  }
+
+  Future<bool> _setString(String key, String value) async {
+    return storage!.setString(key, value);
+  }
+
+  String _getString(String key) {
     return storage!.getString(key) ?? "";
   }
 
-  void _setStringList(String key, List<String> values) async {
-    await storage!.setStringList(key, values);
+  Future<bool> _setStringList(String key, List<String> values) async {
+    return storage!.setStringList(key, values);
   }
 
-  Future<List<String>> _getStringList(String key) async {
+  List<String> _getStringList(String key) {
     return storage!.getStringList(key) ?? [];
   }
 
-  void _setInt(String key, int value) async {
-    await storage!.setInt(key, value);
+  Future<bool> _setInt(String key, int value) async {
+    return storage!.setInt(key, value);
   }
 
-  Future<int> _getInt(String key) async {
+  int _getInt(String key) {
     return storage!.getInt(key) ?? 0;
   }
 
-  void _setDouble(String key, double value) async {
-    await storage!.setDouble(key, value);
+  Future<bool> _setDouble(String key, double value) async {
+    return storage!.setDouble(key, value);
   }
 
-  Future<double> _getDouble(String key) async {
+  double _getDouble(String key) {
     return storage!.getDouble(key) ?? 0.0;
   }
 
-  void _setBool(String key, bool value) async {
-    await storage!.setBool(key, value);
+  Future<bool> _setBool(String key, bool value) async {
+    return storage!.setBool(key, value);
   }
 
-  Future<bool> _getBoll(String key) async {
+  bool _getBoll(String key) {
     return storage!.getBool(key) ?? false;
   }
 }

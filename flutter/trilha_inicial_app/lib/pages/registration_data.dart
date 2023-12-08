@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilha_inicial_app/repositories/language_repository.dart';
 import 'package:trilha_inicial_app/repositories/level_repository.dart';
+import 'package:trilha_inicial_app/services/app_storage_service.dart';
 import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
 
 class RegistrationDataPage extends StatefulWidget {
@@ -24,17 +25,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   double chosenSalary = 0.0;
   int experienceTime = 0;
 
-  late SharedPreferences storage;
-  final String REGISTRATION_DATA_NAME_KEY = "registration_data_name_key";
-  final String REGISTRATION_DATA_BIRTHDAY_KEY =
-      "registration_data_birthday_key";
-  final String REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY =
-      "registration_data_experience_levels_key";
-  final String REGISTRATION_DATA_LANGUAGES_KEY =
-      "registration_data_languages_key";
-  final String REGISTRATION_DATA_EXPERIENCE_TIME_KEY =
-      "registration_data_experience_time_key";
-  final String REGISTRATION_DATA_SALARY_KEY = "registration_data_salary_key";
+  late AppStorageService appStorageService;
 
   bool saving = false;
 
@@ -63,21 +54,16 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   }
 
   void loadData() async {
-    storage = await SharedPreferences.getInstance();
-    setState(() {
-      nameController.text = storage.getString(REGISTRATION_DATA_NAME_KEY) ?? "";
-      birthday = DateTime.tryParse(
-              storage.getString(REGISTRATION_DATA_BIRTHDAY_KEY) ?? "") ??
-          DateTime.now();
-      birthdayController.text = birthday!.toIso8601String();
-      selectedLevel =
-          storage.getString(REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY) ?? "";
-      selectedLanguages =
-          storage.getStringList(REGISTRATION_DATA_LANGUAGES_KEY) ?? [];
-      experienceTime =
-          storage.getInt(REGISTRATION_DATA_EXPERIENCE_TIME_KEY) ?? 0;
-      chosenSalary = storage.getDouble(REGISTRATION_DATA_SALARY_KEY) ?? 0.0;
-    });
+    var sharedPreferences = await SharedPreferences.getInstance();
+    appStorageService = AppStorageService(sharedPreferences);
+    nameController.text = appStorageService.getRegistrationDataName();
+    birthday = appStorageService.getRegistrationDataBirthday();
+    birthdayController.text = birthday!.toIso8601String();
+    selectedLevel = appStorageService.getRegistrationDataExperienceLevel();
+    selectedLanguages = appStorageService.getRegistrationDataLanguages();
+    experienceTime = appStorageService.getRegistrationDataExperienceTime();
+    chosenSalary = appStorageService.getRegistrationDataSalary();
+    setState(() {});
   }
 
   @override
@@ -245,20 +231,18 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        await storage.setString(
-                            REGISTRATION_DATA_NAME_KEY, nameController.text);
-                        await storage.setString(REGISTRATION_DATA_BIRTHDAY_KEY,
-                            birthday!.toIso8601String());
-                        await storage.setString(
-                            REGISTRATION_DATA_EXPERIENCE_LEVEL_KEY,
-                            selectedLevel);
-                        await storage.setStringList(
-                            REGISTRATION_DATA_LANGUAGES_KEY, selectedLanguages);
-                        await storage.setInt(
-                            REGISTRATION_DATA_EXPERIENCE_TIME_KEY,
-                            experienceTime);
-                        await storage.setDouble(
-                            REGISTRATION_DATA_SALARY_KEY, chosenSalary);
+                        await appStorageService
+                            .setRegistrationDataName(nameController.text);
+                        await appStorageService
+                            .setRegistrationDataBirthday(birthday!);
+                        await appStorageService
+                            .setRegistrationDataExperienceLevel(selectedLevel);
+                        await appStorageService
+                            .setRegistrationDataLanguages(selectedLanguages);
+                        await appStorageService
+                            .setRegistrationDataExperienceTime(experienceTime);
+                        await appStorageService
+                            .setRegistrationDataSalary(chosenSalary);
 
                         setState(() {
                           saving = true;

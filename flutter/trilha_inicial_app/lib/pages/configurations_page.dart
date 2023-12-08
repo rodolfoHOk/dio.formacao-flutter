@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trilha_inicial_app/services/app_storage_service.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
 class ConfigurationsPage extends StatefulWidget {
@@ -10,26 +11,23 @@ class ConfigurationsPage extends StatefulWidget {
 }
 
 class _ConfigurationsPageState extends State<ConfigurationsPage> {
-  late SharedPreferences storage;
+  late AppStorageService appStorageService;
 
   TextEditingController usernameController = TextEditingController(text: "");
   TextEditingController heightController = TextEditingController(text: "");
   bool receivePushNotification = false;
   bool darkTheme = false;
 
-  final USERNAME_KEY = "username_key";
-  final HEIGHT_KEY = "height_key";
-  final RECEIVE_NOTIFICATION_KEY = "receive_notification_key";
-  final DARK_THEME_KEY = "dark_theme_key";
-
   void initData() async {
-    storage = await SharedPreferences.getInstance();
+    var sharedPreferences = await SharedPreferences.getInstance();
+    appStorageService = AppStorageService(sharedPreferences);
     setState(() {
-      usernameController.text = storage.getString(USERNAME_KEY) ?? "";
-      heightController.text = (storage.getDouble(HEIGHT_KEY) ?? 0).toString();
+      usernameController.text = appStorageService.getConfigurationUsername();
+      heightController.text =
+          appStorageService.getConfigurationHeight().toString();
       receivePushNotification =
-          storage.getBool(RECEIVE_NOTIFICATION_KEY) ?? false;
-      darkTheme = storage.getBool(DARK_THEME_KEY) ?? false;
+          appStorageService.getConfigurationReceiveNotification();
+      darkTheme = appStorageService.getConfigurationDarkTheme();
     });
   }
 
@@ -42,7 +40,8 @@ class _ConfigurationsPageState extends State<ConfigurationsPage> {
   Future<void> saveData(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
     try {
-      await storage.setDouble(HEIGHT_KEY, double.parse(heightController.text));
+      var height = double.tryParse(heightController.text);
+      await appStorageService.setConfigurationHeight(height ?? 0.0);
     } catch (e) {
       if (context.mounted) {
         showDialog(
@@ -63,9 +62,10 @@ class _ConfigurationsPageState extends State<ConfigurationsPage> {
         return;
       }
     }
-    await storage.setString(USERNAME_KEY, usernameController.text);
-    await storage.setBool(RECEIVE_NOTIFICATION_KEY, receivePushNotification);
-    await storage.setBool(DARK_THEME_KEY, darkTheme);
+    await appStorageService.setConfigurationUsername(usernameController.text);
+    await appStorageService
+        .setConfigurationReceiveNotification(receivePushNotification);
+    await appStorageService.setConfigurationDarkTheme(darkTheme);
     if (context.mounted) {
       Navigator.pop(context);
     }
