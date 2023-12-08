@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/pages/configurations_page.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
 import 'package:trilha_inicial_app/pages/random_number_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data.dart';
@@ -135,7 +136,14 @@ class CustomDrawer extends StatelessWidget {
                     Text("Configurações"),
                   ],
                 )),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) =>
+                          const ConfigurationsPage()));
+            },
           ),
           const Divider(),
           InkWell(
