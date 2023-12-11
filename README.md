@@ -59,3 +59,8 @@
 - [Flutter Shared Preferences](https://pub.dev/packages/shared_preferences)
 
 - instalar um dependência : flutter pub add shared_preferences
+
+- [Hive NoSQL Database](https://pub.dev/packages/hive)
+
+- [Path Provider](https://pub.dev/packages/path_provider)
+

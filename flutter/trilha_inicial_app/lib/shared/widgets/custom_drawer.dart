@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trilha_inicial_app/pages/configurations_page.dart';
+import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
-import 'package:trilha_inicial_app/pages/random_number_page.dart';
+import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -142,7 +142,7 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext builder) =>
-                          const ConfigurationsPage()));
+                          const ConfigurationsHivePage()));
             },
           ),
           const Divider(),
@@ -164,7 +164,7 @@ class CustomDrawer extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext builder) =>
-                            const RandomNumberPage()));
+                            const RandomNumberHivePage()));
               }),
           const Divider(),
           InkWell(

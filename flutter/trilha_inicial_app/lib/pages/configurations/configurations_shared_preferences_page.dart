@@ -3,14 +3,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilha_inicial_app/services/app_storage_service.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
-class ConfigurationsPage extends StatefulWidget {
-  const ConfigurationsPage({super.key});
+class ConfigurationsSharedPreferencesPage extends StatefulWidget {
+  const ConfigurationsSharedPreferencesPage({super.key});
 
   @override
-  State<ConfigurationsPage> createState() => _ConfigurationsPageState();
+  State<ConfigurationsSharedPreferencesPage> createState() =>
+      _ConfigurationsSharedPreferencesPageState();
 }
 
-class _ConfigurationsPageState extends State<ConfigurationsPage> {
+class _ConfigurationsSharedPreferencesPageState
+    extends State<ConfigurationsSharedPreferencesPage> {
   late AppStorageService appStorageService;
 
   TextEditingController usernameController = TextEditingController(text: "");

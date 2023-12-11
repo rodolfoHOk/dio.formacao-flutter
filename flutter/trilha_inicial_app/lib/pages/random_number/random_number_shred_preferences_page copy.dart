@@ -5,14 +5,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilha_inicial_app/services/app_storage_service.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
-class RandomNumberPage extends StatefulWidget {
-  const RandomNumberPage({super.key});
+class RandomNumberSharedPreferencesPage extends StatefulWidget {
+  const RandomNumberSharedPreferencesPage({super.key});
 
   @override
-  State<RandomNumberPage> createState() => _RandomNumberPageState();
+  State<RandomNumberSharedPreferencesPage> createState() =>
+      _RandomNumberSharedPreferencesPageState();
 }
 
-class _RandomNumberPageState extends State<RandomNumberPage> {
+class _RandomNumberSharedPreferencesPageState
+    extends State<RandomNumberSharedPreferencesPage> {
   int generatedNumber = 0;
   int clickCounter = 0;
 
