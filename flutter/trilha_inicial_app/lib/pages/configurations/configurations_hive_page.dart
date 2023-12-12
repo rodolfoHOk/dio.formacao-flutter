@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trilha_inicial_app/services/app_storage_service.dart';
+import 'package:trilha_inicial_app/models/configurations_model.dart';
+import 'package:trilha_inicial_app/services/configurations_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
 class ConfigurationsHivePage extends StatefulWidget {
@@ -11,24 +11,18 @@ class ConfigurationsHivePage extends StatefulWidget {
 }
 
 class _ConfigurationsHivePageState extends State<ConfigurationsHivePage> {
-  late AppStorageService appStorageService;
+  late ConfigurationsRepository configurationsRepository;
+  ConfigurationsModel configurationsModel = ConfigurationsModel.blank();
 
   TextEditingController usernameController = TextEditingController(text: "");
   TextEditingController heightController = TextEditingController(text: "");
-  bool receivePushNotification = false;
-  bool darkTheme = false;
 
   void initData() async {
-    var sharedPreferences = await SharedPreferences.getInstance();
-    appStorageService = AppStorageService(sharedPreferences);
-    setState(() {
-      usernameController.text = appStorageService.getConfigurationUsername();
-      heightController.text =
-          appStorageService.getConfigurationHeight().toString();
-      receivePushNotification =
-          appStorageService.getConfigurationReceiveNotification();
-      darkTheme = appStorageService.getConfigurationDarkTheme();
-    });
+    configurationsRepository = await ConfigurationsRepository.load();
+    configurationsModel = configurationsRepository.getData();
+    usernameController.text = configurationsModel.username;
+    heightController.text = configurationsModel.height.toString();
+    setState(() {});
   }
 
   @override
@@ -41,7 +35,7 @@ class _ConfigurationsHivePageState extends State<ConfigurationsHivePage> {
     FocusManager.instance.primaryFocus?.unfocus();
     try {
       var height = double.tryParse(heightController.text);
-      await appStorageService.setConfigurationHeight(height ?? 0.0);
+      configurationsModel.height = (height ?? 0.0);
     } catch (e) {
       if (context.mounted) {
         showDialog(
@@ -62,10 +56,8 @@ class _ConfigurationsHivePageState extends State<ConfigurationsHivePage> {
         return;
       }
     }
-    await appStorageService.setConfigurationUsername(usernameController.text);
-    await appStorageService
-        .setConfigurationReceiveNotification(receivePushNotification);
-    await appStorageService.setConfigurationDarkTheme(darkTheme);
+    configurationsModel.username = usernameController.text;
+    configurationsRepository.save(configurationsModel);
     if (context.mounted) {
       Navigator.pop(context);
     }
@@ -99,18 +91,18 @@ class _ConfigurationsHivePageState extends State<ConfigurationsHivePage> {
                 ),
                 SwitchListTile(
                     title: const Text("Receber notificações"),
-                    value: receivePushNotification,
+                    value: configurationsModel.receiveNotification,
                     onChanged: (bool value) {
                       setState(() {
-                        receivePushNotification = value;
+                        configurationsModel.receiveNotification = value;
                       });
                     }),
                 SwitchListTile(
                     title: const Text("Tema escuro"),
-                    value: darkTheme,
+                    value: configurationsModel.darkTheme,
                     onChanged: (bool value) {
                       setState(() {
-                        darkTheme = value;
+                        configurationsModel.darkTheme = value;
                       });
                     }),
                 Padding(
