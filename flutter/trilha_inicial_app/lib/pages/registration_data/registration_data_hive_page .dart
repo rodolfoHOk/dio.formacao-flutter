@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trilha_inicial_app/models/registration_data_model.dart';
 import 'package:trilha_inicial_app/repositories/language_repository.dart';
 import 'package:trilha_inicial_app/repositories/level_repository.dart';
-import 'package:trilha_inicial_app/services/app_storage_service.dart';
+import 'package:trilha_inicial_app/repositories/registration_data_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
 
-class RegistrationDataPage extends StatefulWidget {
-  const RegistrationDataPage({super.key});
+class RegistrationDataHivePage extends StatefulWidget {
+  const RegistrationDataHivePage({super.key});
 
   @override
-  State<RegistrationDataPage> createState() => _RegistrationDataPageState();
+  State<RegistrationDataHivePage> createState() =>
+      _RegistrationDataHivePageState();
 }
 
-class _RegistrationDataPageState extends State<RegistrationDataPage> {
+class _RegistrationDataHivePageState extends State<RegistrationDataHivePage> {
+  late RegistrationDataRepository registrationDataRepository;
+  RegistrationDataModel registrationDataModel = RegistrationDataModel.blank();
+
+  var levelRepository = LevelRepository();
+  var languageRepository = LanguageRepository();
+  var levels = [];
+  var languages = [];
+
   TextEditingController nameController = TextEditingController(text: "");
   TextEditingController birthdayController = TextEditingController(text: "");
-  DateTime? birthday;
-  var levelRepository = LevelRepository();
-  var levels = [];
-  var selectedLevel = "";
-  var languageRepository = LanguageRepository();
-  var languages = [];
-  var selectedLanguages = <String>[];
-  double chosenSalary = 0.0;
-  int experienceTime = 0;
-
-  late AppStorageService appStorageService;
 
   bool saving = false;
 
@@ -54,15 +52,10 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
   }
 
   void loadData() async {
-    var sharedPreferences = await SharedPreferences.getInstance();
-    appStorageService = AppStorageService(sharedPreferences);
-    nameController.text = appStorageService.getRegistrationDataName();
-    birthday = appStorageService.getRegistrationDataBirthday();
-    birthdayController.text = birthday!.toIso8601String();
-    selectedLevel = appStorageService.getRegistrationDataExperienceLevel();
-    selectedLanguages = appStorageService.getRegistrationDataLanguages();
-    experienceTime = appStorageService.getRegistrationDataExperienceTime();
-    chosenSalary = appStorageService.getRegistrationDataSalary();
+    registrationDataRepository = await RegistrationDataRepository.load();
+    registrationDataModel = registrationDataRepository.getData();
+    nameController.text = registrationDataModel.name ?? "";
+    birthdayController.text = registrationDataModel.birthday?.toString() ?? "";
     setState(() {});
   }
 
@@ -106,7 +99,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           lastDate: DateTime(2024, 12, 04));
                       if (day != null) {
                         birthdayController.text = day.toString();
-                        birthday = day;
+                        registrationDataModel.birthday = day;
                       }
                     },
                   ),
@@ -117,12 +110,14 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                               dense: true,
                               activeColor: Colors.blue.shade600,
                               title: Text(getLevelTitle(level.toString())),
-                              selected: selectedLevel == level.toString(),
+                              selected: registrationDataModel.experienceLevel ==
+                                  level.toString(),
                               value: level.toString(),
-                              groupValue: selectedLevel,
+                              groupValue: registrationDataModel.experienceLevel,
                               onChanged: (value) {
                                 setState(() {
-                                  selectedLevel = value.toString();
+                                  registrationDataModel.experienceLevel =
+                                      value.toString();
                                 });
                               }))
                           .toList()),
@@ -132,15 +127,18 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           .map((language) => CheckboxListTile(
                               dense: true,
                               title: Text(language.toString()),
-                              value: selectedLanguages.contains(language),
+                              value: registrationDataModel.languages
+                                  .contains(language),
                               onChanged: (bool? value) {
                                 if (value!) {
                                   setState(() {
-                                    selectedLanguages.add(language);
+                                    registrationDataModel.languages
+                                        .add(language);
                                   });
                                 } else {
                                   setState(() {
-                                    selectedLanguages.remove(language);
+                                    registrationDataModel.languages
+                                        .remove(language);
                                   });
                                 }
                               }))
@@ -148,23 +146,23 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                   const TextLabel(text: "Tempo de experiência"),
                   DropdownButton(
                       isExpanded: true,
-                      value: experienceTime,
+                      value: registrationDataModel.experienceTime,
                       items: getDropdownItens(50),
                       onChanged: (value) {
                         setState(() {
-                          experienceTime = value ?? 0;
+                          registrationDataModel.experienceTime = value ?? 0;
                         });
                       }),
                   TextLabel(
                       text:
-                          "Pretensão salarial. R\$ ${chosenSalary.round().toString()}"),
+                          "Pretensão salarial. R\$ ${registrationDataModel.salary?.round().toString()}"),
                   Slider(
                       min: 0,
                       max: 10000,
-                      value: chosenSalary,
+                      value: registrationDataModel.salary ?? 0,
                       onChanged: (double value) {
                         setState(() {
-                          chosenSalary = value;
+                          registrationDataModel.salary = value;
                         });
                       }),
                   const SizedBox(height: 12),
@@ -179,7 +177,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        if (birthday == null) {
+                        if (registrationDataModel.birthday == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text(
@@ -188,7 +186,9 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        if (selectedLevel.trim() == "") {
+                        if (registrationDataModel.experienceLevel == null ||
+                            registrationDataModel.experienceLevel?.trim() ==
+                                "") {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text(
@@ -197,7 +197,7 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        if (selectedLanguages.isEmpty) {
+                        if (registrationDataModel.languages.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content:
@@ -206,16 +206,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        if (selectedLanguages.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content:
-                                      Text("Nenhuma linguagem foi selecionada"),
-                                  backgroundColor: Colors.red));
-                          return;
-                        }
-
-                        if (experienceTime == 0) {
+                        if (registrationDataModel.experienceTime == null ||
+                            registrationDataModel.experienceTime == 0) {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text(
                                   "Deve ter ao menos 1 ano de experiência em alguma linguagem"),
@@ -223,7 +215,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        if (chosenSalary == 0) {
+                        if (registrationDataModel.salary == null ||
+                            registrationDataModel.salary == 0) {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text(
                                   "A pretensão salarial deve ser maior que zero"),
@@ -231,18 +224,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           return;
                         }
 
-                        await appStorageService
-                            .setRegistrationDataName(nameController.text);
-                        await appStorageService
-                            .setRegistrationDataBirthday(birthday!);
-                        await appStorageService
-                            .setRegistrationDataExperienceLevel(selectedLevel);
-                        await appStorageService
-                            .setRegistrationDataLanguages(selectedLanguages);
-                        await appStorageService
-                            .setRegistrationDataExperienceTime(experienceTime);
-                        await appStorageService
-                            .setRegistrationDataSalary(chosenSalary);
+                        registrationDataModel.name = nameController.text;
+                        registrationDataRepository.save(registrationDataModel);
 
                         setState(() {
                           saving = true;

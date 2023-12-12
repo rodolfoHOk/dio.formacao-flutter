@@ -62,5 +62,9 @@
 
 - [Hive NoSQL Database](https://pub.dev/packages/hive)
 
-- [Path Provider](https://pub.dev/packages/path_provider)
+- [path_provider](https://pub.dev/packages/path_provider)
+
+- [hive_generator)](https://pub.dev/packages/hive_generator)
+
+- [build_runner](https://pub.dev/packages/build_runner)
 
