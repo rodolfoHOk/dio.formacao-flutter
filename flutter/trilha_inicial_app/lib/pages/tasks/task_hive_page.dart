@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:trilha_inicial_app/models/task.dart';
-import 'package:trilha_inicial_app/repositories/task_repository.dart';
+import 'package:trilha_inicial_app/models/task_model.dart';
+import 'package:trilha_inicial_app/repositories/task_hive_repository.dart';
 
-class TaskPage extends StatefulWidget {
-  const TaskPage({super.key});
+class TaskHivePage extends StatefulWidget {
+  const TaskHivePage({super.key});
 
   @override
-  State<TaskPage> createState() => _TaskPageState();
+  State<TaskHivePage> createState() => _TaskHivePageState();
 }
 
-class _TaskPageState extends State<TaskPage> {
-  var taskRepository = TaskRepository();
+class _TaskHivePageState extends State<TaskHivePage> {
+  late TaskHiveRepository taskHiveRepository;
   var descriptionController = TextEditingController(text: "");
-  var _tasks = <Task>[];
+  var _tasks = <TaskModel>[];
   var justNotCompleted = false;
 
-  void fetchTasks() async {
-    if (justNotCompleted) {
-      _tasks = await taskRepository.listNotCompleted();
-    } else {
-      _tasks = await taskRepository.list();
-    }
+  void getTasks() async {
+    taskHiveRepository = await TaskHiveRepository.load();
+    _tasks = taskHiveRepository.getData(justNotCompleted);
     setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-    fetchTasks();
+    getTasks();
   }
 
   @override
@@ -52,9 +49,11 @@ class _TaskPageState extends State<TaskPage> {
                         child: const Text("Cancelar")),
                     TextButton(
                         onPressed: () async {
-                          var task = Task(descriptionController.text, false);
-                          await taskRepository.add(task);
+                          var task = TaskModel.create(
+                              descriptionController.text, false);
+                          taskHiveRepository.save(task);
                           Navigator.pop(context);
+                          getTasks();
                           setState(() {});
                         },
                         child: const Text("Adicionar"))
@@ -83,7 +82,7 @@ class _TaskPageState extends State<TaskPage> {
                         value: justNotCompleted,
                         onChanged: (bool value) {
                           justNotCompleted = value;
-                          fetchTasks();
+                          getTasks();
                           setState(() {});
                         })
                   ],
@@ -96,15 +95,16 @@ class _TaskPageState extends State<TaskPage> {
                     return Dismissible(
                       key: Key(task.id),
                       onDismissed: (DismissDirection direction) async {
-                        await taskRepository.remove(task.id);
-                        fetchTasks();
+                        taskHiveRepository.remove(task);
+                        getTasks();
                       },
                       child: ListTile(
                         title: Text(task.description),
                         trailing: Switch(
                             onChanged: (bool value) async {
-                              await taskRepository.update(task.id, value);
-                              fetchTasks();
+                              task.completed = value;
+                              taskHiveRepository.update(task);
+                              getTasks();
                             },
                             value: task.completed),
                       ),
