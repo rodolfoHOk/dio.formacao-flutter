@@ -7,6 +7,8 @@ class TaskSQLiteModel {
 
   TaskSQLiteModel.blank();
 
+  TaskSQLiteModel.create(this._description, this._completed);
+
   TaskSQLiteModel(this._id, this._description, this._completed);
 
   int get id => _id;
