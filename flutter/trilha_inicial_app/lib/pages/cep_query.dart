@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:trilha_inicial_app/models/via_cep_model.dart';
+import 'package:trilha_inicial_app/repositories/via_cep_repository.dart';
 
 class CEPQueryPage extends StatefulWidget {
   const CEPQueryPage({super.key});
@@ -13,11 +11,11 @@ class CEPQueryPage extends StatefulWidget {
 
 class _CEPQueryPageState extends State<CEPQueryPage> {
   var cepController = TextEditingController(text: "");
-  String street = "";
-  String city = "";
-  String state = "";
 
   bool loading = false;
+
+  var viaCepRepository = ViaCEPRepository();
+  var viaCepModel = ViaCEPModel();
 
   @override
   Widget build(BuildContext context) {
@@ -39,37 +37,19 @@ class _CEPQueryPageState extends State<CEPQueryPage> {
                       setState(() {
                         loading = true;
                       });
-                      var response = await http.get(
-                          Uri.parse("https://viacep.com.br/ws/$cep/json/"));
-                      // debugPrint(response.statusCode.toString());
-                      // debugPrint(response.body);
-                      // Map<String, dynamic> json = jsonDecode(response.body);
-                      var viaCepModel =
-                          ViaCEPModel.fromJson(jsonDecode(response.body));
-                      // debugPrint(json.toString());
-                      // debugPrint(json["logradouro"]);
-                      // street = json["logradouro"];
-                      // city = json["localidade"];
-                      // state = json["uf"];
-                      street = viaCepModel.logradouro ?? "";
-                      city = viaCepModel.localidade ?? "";
-                      state = viaCepModel.uf ?? "";
-                    } else {
-                      street = "";
-                      city = "";
-                      state = "";
+                      viaCepModel = await viaCepRepository.queryCEP(cep);
                     }
                     setState(() {
                       loading = false;
                     });
                   }),
               const SizedBox(height: 24),
-              Text(street, style: const TextStyle(fontSize: 18)),
+              Text(viaCepModel.logradouro ?? "",
+                  style: const TextStyle(fontSize: 18)),
               const SizedBox(height: 8),
-              Text("$city - $state", style: const TextStyle(fontSize: 18)),
+              Text("${viaCepModel.localidade ?? ""} - ${viaCepModel.uf ?? ""}",
+                  style: const TextStyle(fontSize: 18)),
               if (loading) const CircularProgressIndicator(),
-              // Visibility(
-              //     visible: loading, child: const CircularProgressIndicator()),
             ],
           ),
         ),
