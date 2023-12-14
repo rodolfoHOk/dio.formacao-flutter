@@ -79,3 +79,8 @@
 - [PDF](files/Assincronismo%20e%20APIs%20REST.pdf)
 
 - [http](https://pub.dev/packages/http)
+
+- [ViaCEP](https://viacep.com.br/)
+
+- [json_to_dart](https://javiercbk.github.io/json_to_dart/)
+
