@@ -50,9 +50,13 @@
 
 - rodar app flutter: flutter run
 
+### Pages, Widgets, Navegação e Funções
+
 - [Flutter Google Fonts](https://pub.dev/packages/google_fonts)
 
 - [PDF: Flutter - Pages, Widgets, Navegação e Funções](files/Pages,%20Widgets,%20Navegação%20e%20Funções.pdf)
+
+### Persistência local de dados
 
 - [PDF: Flutter - Persistência local de dados](files/Persistência%20local%20de%20dados.pdf)
 
@@ -70,3 +74,6 @@
 
 - [sqflite](https://pub.dev/packages/sqflite)
 
+### Assincronismo e APIs REST
+
+- [PDF](files/Assincronismo%20e%20APIs%20REST.pdf)
