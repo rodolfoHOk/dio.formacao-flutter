@@ -4,6 +4,7 @@ import 'package:trilha_inicial_app/pages/image_assets_page.dart';
 import 'package:trilha_inicial_app/pages/list_view_horizontal_page.dart';
 import 'package:trilha_inicial_app/pages/list_view_page.dart';
 import 'package:trilha_inicial_app/pages/tasks/task_sqlite_page.dart';
+import 'package:trilha_inicial_app/pages/test_http.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_drawer.dart';
 
@@ -36,6 +37,7 @@ class _MainPageState extends State<MainPage> {
                   },
                   // scrollDirection: Axis.vertical,
                   children: const [
+                    TestHTTPPage(),
                     CardPage(),
                     ImageAssetsPage(),
                     ListViewPage(),
@@ -50,6 +52,8 @@ class _MainPageState extends State<MainPage> {
                 },
                 currentIndex: pagePosition,
                 items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.get_app), label: "HTTP"),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.fit_screen), label: "Card"),
                   BottomNavigationBarItem(

@@ -60,11 +60,11 @@
 
 - [PDF: Flutter - Persistência local de dados](files/Persistência%20local%20de%20dados.pdf)
 
-- [Flutter Shared Preferences](https://pub.dev/packages/shared_preferences)
+- [shared_preferences](https://pub.dev/packages/shared_preferences)
 
 - instalar um dependência : flutter pub add shared_preferences
 
-- [Hive NoSQL Database](https://pub.dev/packages/hive)
+- [hive](https://pub.dev/packages/hive)
 
 - [path_provider](https://pub.dev/packages/path_provider)
 
@@ -77,3 +77,5 @@
 ### Assincronismo e APIs REST
 
 - [PDF](files/Assincronismo%20e%20APIs%20REST.pdf)
+
+- [http](https://pub.dev/packages/http)
