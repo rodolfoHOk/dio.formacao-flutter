@@ -86,3 +86,5 @@
 
 - [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
 
+- [dio](https://pub.dev/packages/dio)
+
