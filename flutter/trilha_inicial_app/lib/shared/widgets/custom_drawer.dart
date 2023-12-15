@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
+import 'package:trilha_inicial_app/pages/posts_page.dart';
 import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data/registration_data_hive_page%20.dart';
 
@@ -165,6 +166,26 @@ class CustomDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext builder) =>
                             const RandomNumberHivePage()));
+              }),
+          const Divider(),
+          InkWell(
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.post_add),
+                      SizedBox(width: 8),
+                      Text("Posts"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext builder) => const PostsPage()));
               }),
           const Divider(),
           InkWell(
