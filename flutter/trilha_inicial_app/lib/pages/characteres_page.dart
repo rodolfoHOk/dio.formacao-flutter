@@ -11,12 +11,17 @@ class CharactersPage extends StatefulWidget {
 }
 
 class _CharactersPageState extends State<CharactersPage> {
+  final ScrollController _scrollController = ScrollController();
+
   late MarvelRepository marvelRepository;
   CharactersModel? characters;
   int offset = 0;
   var loading = false;
 
   void loadData() async {
+    if (loading) {
+      return;
+    }
     if (characters == null || characters!.data == null) {
       characters = await marvelRepository.getCharacters(offset);
     } else {
@@ -55,6 +60,12 @@ class _CharactersPageState extends State<CharactersPage> {
     super.initState();
     marvelRepository = MarvelRepository();
     loadData();
+    _scrollController.addListener(() {
+      var paginationPosition = _scrollController.position.maxScrollExtent * 0.7;
+      if (_scrollController.position.pixels > paginationPosition) {
+        loadData();
+      }
+    });
   }
 
   @override
@@ -71,6 +82,7 @@ class _CharactersPageState extends State<CharactersPage> {
                   children: [
                     Expanded(
                       child: ListView.builder(
+                          controller: _scrollController,
                           itemCount: (characters!.data == null ||
                                   characters!.data!.results == null)
                               ? 0
