@@ -90,3 +90,7 @@
 
 - [Developer Marvel](https://developer.marvel.com/)
 
+- [crypto](https://pub.dev/packages/crypto)
+
+- [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
+
