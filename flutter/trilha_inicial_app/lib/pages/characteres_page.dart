@@ -13,10 +13,41 @@ class CharactersPage extends StatefulWidget {
 class _CharactersPageState extends State<CharactersPage> {
   late MarvelRepository marvelRepository;
   CharactersModel? characters;
+  int offset = 0;
+  var loading = false;
 
   void loadData() async {
-    characters = await marvelRepository.getCharacters();
-    setState(() {});
+    if (characters == null || characters!.data == null) {
+      characters = await marvelRepository.getCharacters(offset);
+    } else {
+      setState(() {
+        loading = true;
+      });
+      offset = offset + characters!.data!.count!;
+      if (offset < getTotalQuantity()) {
+        var tempList = await marvelRepository.getCharacters(offset);
+        characters!.data!.results!.addAll(tempList.data!.results!);
+      }
+    }
+    setState(() {
+      loading = false;
+    });
+  }
+
+  int getCurrentQuantity() {
+    try {
+      return characters!.data!.results!.length;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  int getTotalQuantity() {
+    try {
+      return characters!.data!.total!;
+    } catch (e) {
+      return 0;
+    }
   }
 
   @override
@@ -30,58 +61,78 @@ class _CharactersPageState extends State<CharactersPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(title: "Heróis"),
+        appBar: CustomAppBar(
+            title: "Heróis: ${getCurrentQuantity()}/${getTotalQuantity()}"),
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
           child: characters == null
-              ? const CircularProgressIndicator()
-              : ListView.builder(
-                  itemCount: (characters!.data == null ||
-                          characters!.data!.results == null)
-                      ? 0
-                      : characters!.data!.results!.length,
-                  itemBuilder: (_, index) {
-                    var character = characters!.data!.results![index];
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 120,
-                                width: 120,
-                                child: Image.network(
-                                    "${character.thumbnail!.path!}.${character.thumbnail!.extension!}"),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      character.name ?? "",
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
+              ? const Center(child: CircularProgressIndicator())
+              : Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: (characters!.data == null ||
+                                  characters!.data!.results == null)
+                              ? 0
+                              : characters!.data!.results!.length,
+                          itemBuilder: (_, index) {
+                            var character = characters!.data!.results![index];
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              child: Card(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 8),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 120,
+                                        width: 120,
+                                        child: Image.network(
+                                            "${character.thumbnail!.path!}.${character.thumbnail!.extension!}"),
                                       ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(character.description ?? ""),
-                                  ],
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              character.name ?? "",
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(character.description ?? ""),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
+                            );
+                          }),
+                    ),
+                    !loading
+                        ? ElevatedButton(
+                            onPressed: () {
+                              loadData();
+                            },
+                            child: const Text(
+                              'Carregar mais items',
+                            ),
+                          )
+                        : const CircularProgressIndicator()
+                  ],
+                ),
         ),
       ),
     );

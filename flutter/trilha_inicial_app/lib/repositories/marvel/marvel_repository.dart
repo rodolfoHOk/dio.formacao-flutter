@@ -7,13 +7,13 @@ import 'package:convert/convert.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MarvelRepository {
-  Future<CharactersModel> getCharacters() async {
+  Future<CharactersModel> getCharacters(int offset) async {
     var dio = Dio();
     var ts = DateTime.now().microsecondsSinceEpoch.toString();
     var publicKey = dotenv.get("DEV_MARVEL_PUBLIC_KEY");
     var privateKey = dotenv.get("DEV_MARVEL_PRIVATE_KEY");
     var hash = _generateMd5("$ts$privateKey$publicKey");
-    var query = "?ts=$ts&apikey=$publicKey&hash=$hash";
+    var query = "?ts=$ts&apikey=$publicKey&hash=$hash&offset=$offset";
     var result = await dio
         .get("https://gateway.marvel.com:443/v1/public/characters$query");
     return CharactersModel.fromJson(result.data);
