@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/task_model.dart';
-import 'package:trilha_inicial_app/repositories/task_hive_repository.dart';
+import 'package:trilha_inicial_app/repositories/hive/task_hive_repository.dart';
 
 class TaskHivePage extends StatefulWidget {
   const TaskHivePage({super.key});

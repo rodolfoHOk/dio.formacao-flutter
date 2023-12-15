@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/via_cep_model.dart';
-import 'package:trilha_inicial_app/repositories/via_cep_repository.dart';
+import 'package:trilha_inicial_app/repositories/http/via_cep_repository.dart';
 
 class CEPQueryPage extends StatefulWidget {
   const CEPQueryPage({super.key});

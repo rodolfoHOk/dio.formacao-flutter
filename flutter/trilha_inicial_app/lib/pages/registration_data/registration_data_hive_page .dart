@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/registration_data_model.dart';
 import 'package:trilha_inicial_app/repositories/language_repository.dart';
 import 'package:trilha_inicial_app/repositories/level_repository.dart';
-import 'package:trilha_inicial_app/repositories/registration_data_repository.dart';
+import 'package:trilha_inicial_app/repositories/hive/registration_data_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/text_label.dart';
 
 class RegistrationDataHivePage extends StatefulWidget {

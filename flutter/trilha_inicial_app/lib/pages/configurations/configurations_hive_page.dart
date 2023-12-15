@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/configurations_model.dart';
-import 'package:trilha_inicial_app/repositories/configurations_repository.dart';
+import 'package:trilha_inicial_app/repositories/hive/configurations_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
 class ConfigurationsHivePage extends StatefulWidget {
