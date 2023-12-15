@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
-import 'package:trilha_inicial_app/pages/heroes_page.dart';
+import 'package:trilha_inicial_app/pages/characteres_page.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
 import 'package:trilha_inicial_app/pages/posts_page.dart';
 import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
@@ -206,7 +206,8 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext builder) => const HeroesPage()));
+                        builder: (BuildContext builder) =>
+                            const CharactersPage()));
               }),
           const Divider(),
           InkWell(
