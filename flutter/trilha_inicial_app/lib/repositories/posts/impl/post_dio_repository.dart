@@ -9,7 +9,7 @@ class PostDioRepository implements PostRepository {
     var response = await dio.get("https://jsonplaceholder.typicode.com/posts");
     if (response.statusCode == 200) {
       return (response.data as List)
-          .map((postJson) => PostModel.fromJson(postJson))
+          .map((post) => PostModel.fromJson(post))
           .toList();
     }
     return [];
