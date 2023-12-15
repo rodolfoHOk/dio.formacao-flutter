@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/post_model.dart';
 import 'package:trilha_inicial_app/pages/comments_page.dart';
-import 'package:trilha_inicial_app/repositories/http/post_repository.dart';
+import 'package:trilha_inicial_app/repositories/http/post_http_repository.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
 class PostsPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  var postRepository = PostRepository();
+  var postRepository = PostHttpRepository();
   var posts = <PostModel>[];
 
   void loadData() async {

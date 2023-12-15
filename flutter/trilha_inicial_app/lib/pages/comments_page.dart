@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/comment_model.dart';
-import 'package:trilha_inicial_app/repositories/http/comment_repository.dart';
+import 'package:trilha_inicial_app/repositories/http/comment_http_repository.dart';
 
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
@@ -14,7 +14,7 @@ class CommentsPage extends StatefulWidget {
 }
 
 class _CommentsPageState extends State<CommentsPage> {
-  var commentRepository = CommentRepository();
+  var commentRepository = CommentHttpRepository();
   var comments = <CommentModel>[];
 
   void loadData() async {
