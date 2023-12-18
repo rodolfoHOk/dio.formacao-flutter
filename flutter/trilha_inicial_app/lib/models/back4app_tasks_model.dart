@@ -36,6 +36,8 @@ class Back4AppTaskModel {
   Back4AppTaskModel(this._objectId, this._description, this._completed,
       this._createdAt, this._updatedAt);
 
+  Back4AppTaskModel.create(this._description, this._completed);
+
   String get objectId => _objectId;
   set objectId(String objectId) => _objectId = objectId;
   String get description => _description;
@@ -62,6 +64,21 @@ class Back4AppTaskModel {
     data['completed'] = _completed;
     data['createdAt'] = _createdAt;
     data['updatedAt'] = _updatedAt;
+    return data;
+  }
+
+  Map<String, dynamic> toCreateJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['description'] = _description;
+    data['completed'] = _completed;
+    return data;
+  }
+
+  Map<String, dynamic> toJsonEndpoint() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['objectId'] = _objectId;
+    data['description'] = _description;
+    data['completed'] = _completed;
     return data;
   }
 }

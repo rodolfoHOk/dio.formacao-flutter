@@ -11,20 +11,34 @@ class TaskHTTPPage extends StatefulWidget {
 }
 
 class _TaskHTTPPageState extends State<TaskHTTPPage> {
-  Back4AppTaskRepository back4appTaskRepository = Back4AppTaskRepository();
   var descriptionController = TextEditingController(text: "");
+  Back4AppTaskRepository back4appTaskRepository = Back4AppTaskRepository();
   Back4AppTasksModel _back4AppTasks = Back4AppTasksModel([]);
   var justNotCompleted = false;
+  var isLoading = false;
 
   void getTasks() async {
-    _back4AppTasks = await back4appTaskRepository.list();
-    setState(() {});
+    setState(() {
+      isLoading = true;
+    });
+    _back4AppTasks = await back4appTaskRepository.list(justNotCompleted);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     getTasks();
+  }
+
+  Future<void> createTask(BuildContext context) async {
+    var task = Back4AppTaskModel.create(descriptionController.text, false);
+    await back4appTaskRepository.create(task);
+    if (context.mounted) Navigator.of(context).pop(context);
+    getTasks();
+    setState(() {});
   }
 
   @override
@@ -49,14 +63,7 @@ class _TaskHTTPPageState extends State<TaskHTTPPage> {
                         },
                         child: const Text("Cancelar")),
                     TextButton(
-                        onPressed: () async {
-                          // var task = TaskSQLiteModel.create(
-                          //     descriptionController.text, false);
-                          // taskSQLiteRepository.save(task);
-                          Navigator.pop(context);
-                          getTasks();
-                          setState(() {});
-                        },
+                        onPressed: () => createTask(context),
                         child: const Text("Adicionar"))
                   ],
                 );
@@ -66,7 +73,7 @@ class _TaskHTTPPageState extends State<TaskHTTPPage> {
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
-      body: _back4AppTasks.tasks.isEmpty
+      body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Container(
               margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -96,9 +103,10 @@ class _TaskHTTPPageState extends State<TaskHTTPPage> {
                         itemBuilder: (BuildContext builder, int index) {
                           var task = _back4AppTasks.tasks[index];
                           return Dismissible(
-                            key: Key(task.objectId.toString()),
+                            key: Key(task.objectId),
                             onDismissed: (DismissDirection direction) async {
-                              // taskSQLiteRepository.delete(task.id);
+                              await back4appTaskRepository
+                                  .delete(task.objectId);
                               getTasks();
                             },
                             child: ListTile(
@@ -106,7 +114,7 @@ class _TaskHTTPPageState extends State<TaskHTTPPage> {
                               trailing: Switch(
                                   onChanged: (bool value) async {
                                     task.completed = value;
-                                    // taskSQLiteRepository.update(task);
+                                    await back4appTaskRepository.update(task);
                                     getTasks();
                                   },
                                   value: task.completed),
