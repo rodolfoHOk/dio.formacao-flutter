@@ -3,14 +3,12 @@
 class Back4AppTasksModel {
   List<Back4AppTaskModel> _tasks = [];
 
-  Back4AppTasksModel({List<Back4AppTaskModel>? results}) {
-    if (results != null) {
-      _tasks = results;
-    }
+  Back4AppTasksModel(List<Back4AppTaskModel> tasks) {
+    _tasks = tasks;
   }
 
-  List<Back4AppTaskModel> get results => _tasks;
-  set results(List<Back4AppTaskModel> results) => _tasks = results;
+  List<Back4AppTaskModel> get tasks => _tasks;
+  set results(List<Back4AppTaskModel> tasks) => _tasks = tasks;
 
   Back4AppTasksModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {

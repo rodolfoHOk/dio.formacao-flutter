@@ -5,7 +5,7 @@ import 'package:trilha_inicial_app/pages/login_page.dart';
 import 'package:trilha_inicial_app/pages/posts_page.dart';
 import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data/registration_data_hive_page%20.dart';
-import 'package:trilha_inicial_app/repositories/back4app/back4app_task_repository.dart';
+import 'package:trilha_inicial_app/pages/tasks/task_http_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -222,16 +222,13 @@ class CustomDrawer extends StatelessWidget {
                       Text("Tarefas HTTP"),
                     ],
                   )),
-              onTap: () async {
-                var repository = Back4AppTaskRepository();
-                var tasks = await repository.list();
-                debugPrint(tasks.toString());
-                // Navigator.pop(context);
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (BuildContext builder) =>
-                //             const CharactersPage()));
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext builder) =>
+                            const TaskHTTPPage()));
               }),
           const Divider(),
           InkWell(
