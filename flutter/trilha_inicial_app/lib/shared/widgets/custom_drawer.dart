@@ -5,6 +5,7 @@ import 'package:trilha_inicial_app/pages/login_page.dart';
 import 'package:trilha_inicial_app/pages/posts_page.dart';
 import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data/registration_data_hive_page%20.dart';
+import 'package:trilha_inicial_app/repositories/back4app/back4app_task_repository.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -12,8 +13,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           UserAccountsDrawerHeader(
               decoration: const BoxDecoration(color: Colors.deepOrange),
@@ -208,6 +208,30 @@ class CustomDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext builder) =>
                             const CharactersPage()));
+              }),
+          const Divider(),
+          InkWell(
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.task),
+                      SizedBox(width: 8),
+                      Text("Tarefas HTTP"),
+                    ],
+                  )),
+              onTap: () async {
+                var repository = Back4AppTaskRepository();
+                var tasks = await repository.list();
+                debugPrint(tasks.toString());
+                // Navigator.pop(context);
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (BuildContext builder) =>
+                //             const CharactersPage()));
               }),
           const Divider(),
           InkWell(
