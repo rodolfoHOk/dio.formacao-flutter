@@ -6,6 +6,7 @@ import 'package:trilha_inicial_app/pages/posts_page.dart';
 import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data/registration_data_hive_page%20.dart';
 import 'package:trilha_inicial_app/pages/tasks/task_http_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -61,7 +62,11 @@ class CustomDrawer extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: const Row(
                   children: [
-                    Icon(Icons.menu_book_outlined),
+                    FaIcon(
+                      FontAwesomeIcons.bookOpen,
+                      color: Colors.deepOrange,
+                      size: 20,
+                    ),
                     SizedBox(width: 8),
                     Text("Dados cadastrais"),
                   ],

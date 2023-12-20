@@ -102,5 +102,9 @@
 
 - [pub.dev](https://pub.dev/)
 
+- [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
+
 - gerar ícones: flutter pub run flutter_launcher_icons
+
+- [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter)
 
