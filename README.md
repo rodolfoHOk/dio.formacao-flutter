@@ -108,3 +108,5 @@
 
 - [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter)
 
+- [percent_indicator](https://pub.dev/packages/percent_indicator)
+
