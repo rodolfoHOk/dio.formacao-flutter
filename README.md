@@ -99,3 +99,8 @@
 ### Trabalhando com pacotes externos no Flutter
 
 - [PDF: Pacotes externos](files/Pacotes%20Externos.pdf)
+
+- [pub.dev](https://pub.dev/)
+
+- gerar ícones: flutter pub run flutter_launcher_icons
+
