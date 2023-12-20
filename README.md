@@ -96,3 +96,6 @@
 
 - [back4app](https://www.back4app.com/)
 
+### Trabalhando com pacotes externos no Flutter
+
+- [PDF: Pacotes externos](files/Pacotes%20Externos.pdf)
