@@ -110,3 +110,5 @@
 
 - [percent_indicator](https://pub.dev/packages/percent_indicator)
 
+- [auto_size_text](https://pub.dev/packages/auto_size_text)
+
