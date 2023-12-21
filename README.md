@@ -120,3 +120,6 @@
 
 - [intl](https://pub.dev/packages/intl)
 
+- [easy_localization](https://pub.dev/packages/easy_localization)
+
+

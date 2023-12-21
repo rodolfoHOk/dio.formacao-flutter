@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
 import 'package:trilha_inicial_app/pages/characteres_page.dart';
@@ -331,6 +332,27 @@ class CustomDrawer extends StatelessWidget {
                 Intl.defaultLocale = 'pt_BR';
                 debugPrint(date.toString());
                 debugPrint(DateFormat.yMd().format(date));
+              }),
+          const Divider(),
+          InkWell(
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.houseFlag),
+                      SizedBox(width: 8),
+                      Text("pt-BR"),
+                    ],
+                  )),
+              onTap: () {
+                if (context.locale == const Locale('pt', 'BR')) {
+                  context.setLocale(const Locale('en', 'US'));
+                } else {
+                  context.setLocale(const Locale('pt', 'BR'));
+                }
+                Navigator.pop(context);
               }),
           const Divider(),
           InkWell(
