@@ -112,3 +112,6 @@
 
 - [auto_size_text](https://pub.dev/packages/auto_size_text)
 
+- [animated_text_kit](https://pub.dev/packages/animated_text_kit)
+
+
