@@ -8,6 +8,7 @@ import 'package:trilha_inicial_app/pages/registration_data/registration_data_hiv
 import 'package:trilha_inicial_app/pages/tasks/task_http_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/auto_size_text_page.dart';
+import 'package:trilha_inicial_app/pages/visuals_packages/bottom_bar_page.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/pertcent_indicator_page.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -278,6 +279,27 @@ class CustomDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext builder) =>
                             const AutoSizeTextPage()));
+              }),
+          const Divider(),
+          InkWell(
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.ship),
+                      SizedBox(width: 8),
+                      Text("Bottom bar"),
+                    ],
+                  )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext builder) =>
+                            const BottomBarPage()));
               }),
           const Divider(),
           InkWell(

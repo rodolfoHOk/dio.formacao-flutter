@@ -114,4 +114,5 @@
 
 - [animated_text_kit](https://pub.dev/packages/animated_text_kit)
 
+- [convex_bottom_bar](https://pub.dev/packages/convex_bottom_bar)
 
