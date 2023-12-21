@@ -118,3 +118,5 @@
 
 - [brasil_fields](https://pub.dev/packages/brasil_fields)
 
+- [intl](https://pub.dev/packages/intl)
+

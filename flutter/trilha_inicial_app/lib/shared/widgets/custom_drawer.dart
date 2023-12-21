@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
 import 'package:trilha_inicial_app/pages/characteres_page.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
@@ -6,7 +9,6 @@ import 'package:trilha_inicial_app/pages/posts_page.dart';
 import 'package:trilha_inicial_app/pages/random_number/random_number_hive_page.dart';
 import 'package:trilha_inicial_app/pages/registration_data/registration_data_hive_page%20.dart';
 import 'package:trilha_inicial_app/pages/tasks/task_http_page.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/auto_size_text_page.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/bottom_bar_page.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/pertcent_indicator_page.dart';
@@ -300,6 +302,35 @@ class CustomDrawer extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (BuildContext builder) =>
                             const BottomBarPage()));
+              }),
+          const Divider(),
+          InkWell(
+              child: Container(
+                  width: double.maxFinite,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: const Row(
+                    children: [
+                      FaIcon(FontAwesomeIcons.flag),
+                      SizedBox(width: 8),
+                      Text("Intl"),
+                    ],
+                  )),
+              onTap: () {
+                var f = NumberFormat('#,###.0#', 'en_US');
+                var fBr = NumberFormat('#,###.0#', 'pt_BR');
+                debugPrint(f.format(12345.678));
+                debugPrint(fBr.format(12345.678));
+
+                initializeDateFormatting();
+                var date = DateTime(2023, 12, 21);
+                var fd1 = DateFormat('EEEE', 'en_US');
+                debugPrint(fd1.format(date));
+                var fd2 = DateFormat('EEEE', 'pt_BR');
+                debugPrint(fd2.format(date));
+                Intl.defaultLocale = 'pt_BR';
+                debugPrint(date.toString());
+                debugPrint(DateFormat.yMd().format(date));
               }),
           const Divider(),
           InkWell(
