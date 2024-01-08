@@ -128,3 +128,9 @@
 
 - [share_plus](https://pub.dev/packages/share_plus)
 
+- [path_provider](https://pub.dev/packages/path_provider)
+
+- [package_info_plus](https://pub.dev/packages/package_info_plus)
+
+- [device_info_plus](https://pub.dev/packages/device_info_plus)
+

@@ -1,10 +1,15 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 // import 'package:intl/intl.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/battery_page.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
@@ -468,6 +473,104 @@ class CustomDrawer extends StatelessWidget {
             ),
             onTap: () {
               Share.share('Dê uma olhada neste site: https://dio.me');
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.folderOpen,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Path"),
+                ],
+              ),
+            ),
+            onTap: () async {
+              Directory tempDir = await path_provider.getTemporaryDirectory();
+              debugPrint(tempDir.path);
+
+              var appSupportDir =
+                  await path_provider.getApplicationSupportDirectory();
+              debugPrint(appSupportDir.path);
+
+              var appDocsDir =
+                  await path_provider.getApplicationDocumentsDirectory();
+              debugPrint(appDocsDir.path);
+
+              var appCacheDir =
+                  await path_provider.getApplicationCacheDirectory();
+              debugPrint(appCacheDir.path);
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.circleInfo,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Informações do App"),
+                ],
+              ),
+            ),
+            onTap: () async {
+              PackageInfo packageInfo = await PackageInfo.fromPlatform();
+              String appName = packageInfo.appName;
+              String packageName = packageInfo.packageName;
+              String version = packageInfo.version;
+              String buildNumber = packageInfo.buildNumber;
+
+              debugPrint(appName);
+              debugPrint(packageName);
+              debugPrint(version);
+              debugPrint(buildNumber);
+
+              debugPrint(Platform.operatingSystem);
+              debugPrint(Platform.isAndroid.toString());
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.robot,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Informações do Dispositivo"),
+                ],
+              ),
+            ),
+            onTap: () async {
+              DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
+              if (Platform.isAndroid) {
+                AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+                debugPrint('Running on Model ${androidInfo.model}');
+                debugPrint('Manufacturer ${androidInfo.manufacturer}');
+                debugPrint('Device ${androidInfo.device}');
+              } else if (Platform.isIOS) {
+                IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+                debugPrint('Running on ${iosInfo.utsname.machine}');
+              } else {
+                WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
+                debugPrint('Running on ${webBrowserInfo.userAgent}');
+              }
             },
           ),
           const Divider(),
