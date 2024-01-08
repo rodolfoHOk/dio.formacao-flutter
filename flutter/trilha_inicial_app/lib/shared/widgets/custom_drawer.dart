@@ -4,6 +4,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+
 import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/battery_page.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
 import 'package:trilha_inicial_app/pages/characteres_page.dart';
@@ -446,6 +448,26 @@ class CustomDrawer extends StatelessWidget {
             onTap: () async {
               var url = Uri.parse("google.navigation:q=Orlando FL&mode=d");
               await launchUrl(url);
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.shareNodes,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Compartilhar"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Share.share('Dê uma olhada neste site: https://dio.me');
             },
           ),
           const Divider(),

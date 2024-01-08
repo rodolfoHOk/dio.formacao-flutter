@@ -54,6 +54,7 @@ dependencies:
   easy_localization: ^3.0.3
   battery_plus: ^5.0.2
   url_launcher: ^6.2.2
+  share_plus: ^7.2.1
   
 
 dev_dependencies:

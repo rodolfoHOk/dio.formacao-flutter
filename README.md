@@ -126,3 +126,5 @@
 
 - [url_launcher](https://pub.dev/packages/url_launcher)
 
+- [share_plus](https://pub.dev/packages/share_plus)
+
