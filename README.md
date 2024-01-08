@@ -122,4 +122,7 @@
 
 - [easy_localization](https://pub.dev/packages/easy_localization)
 
+- [battery_plus](https://pub.dev/packages/battery_plus)
+
+- [url_launcher](https://pub.dev/packages/url_launcher)
 
