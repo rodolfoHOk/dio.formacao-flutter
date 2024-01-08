@@ -3,6 +3,7 @@ import 'package:intl/date_symbol_data_local.dart';
 // import 'package:intl/intl.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:trilha_inicial_app/pages/battery/battery_page.dart';
 import 'package:trilha_inicial_app/pages/configurations/configurations_hive_page.dart';
 import 'package:trilha_inicial_app/pages/characteres_page.dart';
 import 'package:trilha_inicial_app/pages/login_page.dart';
@@ -354,6 +355,27 @@ class CustomDrawer extends StatelessWidget {
                 }
                 Navigator.pop(context);
               }),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(FontAwesomeIcons.batteryHalf),
+                  SizedBox(width: 8),
+                  Text("Status da Bateria"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) => const BatteryPage()));
+            },
+          ),
           const Divider(),
           InkWell(
             child: Container(
