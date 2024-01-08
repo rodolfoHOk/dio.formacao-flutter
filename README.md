@@ -134,3 +134,5 @@
 
 - [device_info_plus](https://pub.dev/packages/device_info_plus)
 
+- [connectivity_plus](https://pub.dev/packages/connectivity_plus)
+
