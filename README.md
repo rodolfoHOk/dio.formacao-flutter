@@ -140,3 +140,7 @@
 
 - [qr_code_scanner](https://pub.dev/packages/qr_code_scanner)
 
+- [image_picker](https://pub.dev/packages/image_picker)
+
+- [image_gallery_saver](https://pub.dev/packages/image_gallery_saver)
+

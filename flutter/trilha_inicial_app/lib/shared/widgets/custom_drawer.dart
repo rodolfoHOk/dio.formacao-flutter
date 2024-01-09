@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/connectivity_page.dart';
 import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/gps_page.dart';
+import 'package:trilha_inicial_app/pages/camera_and_images/camera_page.dart';
 import 'package:trilha_inicial_app/pages/camera_and_images/qr_code_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
@@ -647,6 +648,30 @@ class CustomDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext builder) => const QRCodePage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.camera,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Camera"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) => const CameraPage()));
             },
           ),
           const Divider(),
