@@ -136,3 +136,7 @@
 
 - [connectivity_plus](https://pub.dev/packages/connectivity_plus)
 
+- [geolocator](https://pub.dev/packages/geolocator)
+
+- [qr_code_scanner](https://pub.dev/packages/qr_code_scanner)
+

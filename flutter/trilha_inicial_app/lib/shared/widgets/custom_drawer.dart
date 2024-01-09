@@ -8,6 +8,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/connectivity_page.dart';
+import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/gps_page.dart';
+import 'package:trilha_inicial_app/pages/camera_and_images/qr_code_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -597,6 +599,54 @@ class CustomDrawer extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (BuildContext builder) =>
                           const ConnectivityPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.locationDot,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("GPS"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) => const GPSPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.qrcode,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("QR Code"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) => const QRCodePage()));
             },
           ),
           const Divider(),
