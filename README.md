@@ -144,3 +144,5 @@
 
 - [image_gallery_saver](https://pub.dev/packages/image_gallery_saver)
 
+- [image_cropper](https://pub.dev/packages/image_cropper)
+
