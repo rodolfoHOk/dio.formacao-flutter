@@ -156,3 +156,5 @@
 
 - [flutter_mobx](https://pub.dev/packages/flutter_mobx)
 
+- [mobx_codegen](https://pub.dev/packages/mobx_codegen)
+
