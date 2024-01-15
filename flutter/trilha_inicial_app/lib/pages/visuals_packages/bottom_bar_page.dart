@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/state_managers/counter_mobx_page.dart';
 import 'package:trilha_inicial_app/pages/state_managers/counter_mobx_store_page.dart';
 import 'package:trilha_inicial_app/pages/state_managers/counter_provider_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/task_mobx_page.dart';
 import 'package:trilha_inicial_app/pages/state_managers/task_provider_page.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -35,7 +36,7 @@ class _BottomBarPageState extends State<BottomBarPage>
             TaskProviderPage(),
             CounterMobXPage(),
             CounterMobXStorePage(),
-            Container(color: Colors.yellow),
+            TaskMobXPage(),
           ],
         ),
         bottomNavigationBar: ConvexAppBar(
@@ -45,7 +46,7 @@ class _BottomBarPageState extends State<BottomBarPage>
             TabItem(icon: Icons.map, title: 'PTarefas'),
             TabItem(icon: Icons.add, title: 'MContador'),
             TabItem(icon: Icons.message, title: 'MSContador'),
-            TabItem(icon: Icons.people, title: 'Brasil'),
+            TabItem(icon: Icons.people, title: 'MSTarefas'),
           ],
           onTap: (int i) => tabController.index = i,
         ),
