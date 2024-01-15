@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/pages/state_managers/counter_page.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/brasil_fields_page.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -28,7 +29,7 @@ class _BottomBarPageState extends State<BottomBarPage>
         body: TabBarView(
           controller: tabController,
           children: [
-            Container(color: Colors.yellow),
+            const CounterPage(),
             Container(color: Colors.red),
             Container(color: Colors.black),
             Container(color: Colors.green),

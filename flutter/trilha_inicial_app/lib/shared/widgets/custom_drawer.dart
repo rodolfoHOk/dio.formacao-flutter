@@ -82,6 +82,31 @@ class CustomDrawer extends StatelessWidget {
               child: const Row(
                 children: [
                   FaIcon(
+                    FontAwesomeIcons.ship,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Bottom bar"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) =>
+                          const BottomBarPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
                     FontAwesomeIcons.bookOpen,
                     color: Colors.deepOrange,
                     size: 20,
@@ -307,31 +332,6 @@ class CustomDrawer extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (BuildContext builder) =>
                           const AutoSizeTextPage()));
-            },
-          ),
-          const Divider(),
-          InkWell(
-            child: Container(
-              width: double.maxFinite,
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: const Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.ship,
-                    size: 20,
-                  ),
-                  SizedBox(width: 8),
-                  Text("Bottom bar"),
-                ],
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext builder) =>
-                          const BottomBarPage()));
             },
           ),
           const Divider(),
