@@ -146,3 +146,7 @@
 
 - [image_cropper](https://pub.dev/packages/image_cropper)
 
+### Gerenciamento de Estado e Padrões no Flutter
+
+- [provider](https://pub.dev/packages/provider)
+
