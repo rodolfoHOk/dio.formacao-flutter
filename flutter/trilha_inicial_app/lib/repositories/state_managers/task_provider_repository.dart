@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/task.dart';
 
-class TaskRepository extends ChangeNotifier {
+class TaskProviderRepository extends ChangeNotifier {
   final List<Task> _tasks = [];
   var _justNotCompleted = false;
 

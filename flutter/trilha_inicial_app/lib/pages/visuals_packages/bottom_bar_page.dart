@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trilha_inicial_app/pages/state_managers/counter_page.dart';
-import 'package:trilha_inicial_app/pages/state_managers/task_page.dart';
-import 'package:trilha_inicial_app/pages/visuals_packages/brasil_fields_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/counter_mobx_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/counter_provider_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/task_provider_page.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
@@ -30,19 +30,19 @@ class _BottomBarPageState extends State<BottomBarPage>
         body: TabBarView(
           controller: tabController,
           children: [
-            const CounterPage(),
-            TaskPage(),
-            Container(color: Colors.black),
+            const CounterProviderPage(),
+            TaskProviderPage(),
+            CounterMobXPage(),
             Container(color: Colors.green),
-            const BrasilFieldsPage(),
+            Container(color: Colors.yellow),
           ],
         ),
         bottomNavigationBar: ConvexAppBar(
           controller: tabController,
           items: const [
-            TabItem(icon: Icons.home, title: 'Contador'),
-            TabItem(icon: Icons.map, title: 'Tarefas'),
-            TabItem(icon: Icons.add, title: 'Add'),
+            TabItem(icon: Icons.home, title: 'P Contador'),
+            TabItem(icon: Icons.map, title: 'P Tarefas'),
+            TabItem(icon: Icons.add, title: 'M Contador'),
             TabItem(icon: Icons.message, title: 'Message'),
             TabItem(icon: Icons.people, title: 'Brasil'),
           ],

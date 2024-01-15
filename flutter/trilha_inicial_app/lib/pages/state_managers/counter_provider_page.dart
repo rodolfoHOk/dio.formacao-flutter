@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trilha_inicial_app/services/counter_service.dart';
+import 'package:trilha_inicial_app/services/state_managers/counter_provider_service.dart';
 
-class CounterPage extends StatelessWidget {
-  const CounterPage({super.key});
+class CounterProviderPage extends StatelessWidget {
+  const CounterProviderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,13 @@ class CounterPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Consumer<CounterService>(builder: (context, counterService, widget) {
+        const Text(
+          "Contador Provider",
+          style: TextStyle(fontSize: 24),
+        ),
+        const SizedBox(height: 16),
+        Consumer<CounterProviderService>(
+            builder: (context, counterService, widget) {
           debugPrint("build consumer"); // imprime
           return Text(
             counterService.counter.toString(),
@@ -21,7 +27,7 @@ class CounterPage extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             var counterService =
-                Provider.of<CounterService>(context, listen: false);
+                Provider.of<CounterProviderService>(context, listen: false);
             counterService.increment();
           },
           child: const Text("Incrementar"),

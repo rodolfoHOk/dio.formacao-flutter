@@ -152,3 +152,7 @@
 
 - [provider](https://pub.dev/packages/provider)
 
+- [mobx](https://pub.dev/packages/mobx)
+
+- [flutter_mobx](https://pub.dev/packages/flutter_mobx)
+

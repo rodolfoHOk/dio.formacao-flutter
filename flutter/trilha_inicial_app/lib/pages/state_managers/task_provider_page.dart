@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trilha_inicial_app/models/task.dart';
-import 'package:trilha_inicial_app/repositories/state_managers/task_repository.dart';
+import 'package:trilha_inicial_app/repositories/state_managers/task_provider_repository.dart';
 
 // ignore: must_be_immutable
-class TaskPage extends StatelessWidget {
+class TaskProviderPage extends StatelessWidget {
   var descriptionController = TextEditingController(text: "");
 
-  TaskPage({super.key});
+  TaskProviderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,8 @@ class TaskPage extends StatelessWidget {
                       child: const Text("Cancelar")),
                   TextButton(
                       onPressed: () async {
-                        Provider.of<TaskRepository>(context, listen: false)
+                        Provider.of<TaskProviderRepository>(context,
+                                listen: false)
                             .add(Task(descriptionController.text, false));
                         Navigator.pop(context);
                       },
@@ -58,12 +59,13 @@ class TaskPage extends StatelessWidget {
                     "Apenas não concluídos",
                     style: TextStyle(fontSize: 18),
                   ),
-                  Consumer<TaskRepository>(
+                  Consumer<TaskProviderRepository>(
                       builder: (_, taskRepository, widget) {
                     return Switch(
                       value: taskRepository.justNotCompleted,
                       onChanged: (bool value) {
-                        Provider.of<TaskRepository>(context, listen: false)
+                        Provider.of<TaskProviderRepository>(context,
+                                listen: false)
                             .justNotCompleted = value;
                       },
                     );
@@ -72,7 +74,7 @@ class TaskPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Consumer<TaskRepository>(
+              child: Consumer<TaskProviderRepository>(
                   builder: (_, taskRepository, widget) {
                 return ListView.builder(
                   itemCount: taskRepository.tasks.length,
@@ -81,7 +83,8 @@ class TaskPage extends StatelessWidget {
                     return Dismissible(
                       key: Key(task.id),
                       onDismissed: (DismissDirection direction) async {
-                        Provider.of<TaskRepository>(context, listen: false)
+                        Provider.of<TaskProviderRepository>(context,
+                                listen: false)
                             .remove(task.id);
                       },
                       child: ListTile(
@@ -89,7 +92,8 @@ class TaskPage extends StatelessWidget {
                         trailing: Switch(
                           onChanged: (bool value) async {
                             task.completed = value;
-                            Provider.of<TaskRepository>(context, listen: false)
+                            Provider.of<TaskProviderRepository>(context,
+                                    listen: false)
                                 .update(task.id, task.completed);
                           },
                           value: task.completed,
