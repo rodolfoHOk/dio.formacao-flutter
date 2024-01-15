@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/pages/state_managers/counter_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/task_page.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/brasil_fields_page.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -30,7 +31,7 @@ class _BottomBarPageState extends State<BottomBarPage>
           controller: tabController,
           children: [
             const CounterPage(),
-            Container(color: Colors.red),
+            TaskPage(),
             Container(color: Colors.black),
             Container(color: Colors.green),
             const BrasilFieldsPage(),
@@ -39,8 +40,8 @@ class _BottomBarPageState extends State<BottomBarPage>
         bottomNavigationBar: ConvexAppBar(
           controller: tabController,
           items: const [
-            TabItem(icon: Icons.home, title: 'Home'),
-            TabItem(icon: Icons.map, title: 'Discovery'),
+            TabItem(icon: Icons.home, title: 'Contador'),
+            TabItem(icon: Icons.map, title: 'Tarefas'),
             TabItem(icon: Icons.add, title: 'Add'),
             TabItem(icon: Icons.message, title: 'Message'),
             TabItem(icon: Icons.people, title: 'Brasil'),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:trilha_inicial_app/pages/splash_screen/splash_screen_delay_page.dart';
+import 'package:trilha_inicial_app/repositories/state_managers/task_repository.dart';
 import 'package:trilha_inicial_app/services/counter_service.dart';
 import 'package:trilha_inicial_app/services/dark_mode_service.dart';
 
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<CounterService>(
           create: (_) => CounterService(),
+        ),
+        ChangeNotifierProvider<TaskRepository>(
+          create: (_) => TaskRepository(),
         ),
       ],
       child: Consumer<DarkModeService>(

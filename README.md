@@ -148,5 +148,7 @@
 
 ### Gerenciamento de Estado e Padrões no Flutter
 
+- [PDF](files/Gerenciamento%20de%20Estado%20e%20Padrões%20em%20Flutter.pdf)
+
 - [provider](https://pub.dev/packages/provider)
 
