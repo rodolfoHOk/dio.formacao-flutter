@@ -11,6 +11,7 @@ import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/connectivity
 import 'package:trilha_inicial_app/pages/Interatividade_app_flutter/gps_page.dart';
 import 'package:trilha_inicial_app/pages/camera_and_images/camera_page.dart';
 import 'package:trilha_inicial_app/pages/camera_and_images/qr_code_page.dart';
+import 'package:trilha_inicial_app/pages/visuals_packages/bottom_bar_page_two.dart';
 import 'package:trilha_inicial_app/pages/visuals_packages/brasil_fields_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
@@ -98,6 +99,31 @@ class CustomDrawer extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (BuildContext builder) =>
                           const BottomBarPage()));
+            },
+          ),
+          const Divider(),
+          InkWell(
+            child: Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: const Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.ship,
+                    size: 20,
+                  ),
+                  SizedBox(width: 8),
+                  Text("Bottom bar 2"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext builder) =>
+                          const BottomBarPageTwo()));
             },
           ),
           const Divider(),

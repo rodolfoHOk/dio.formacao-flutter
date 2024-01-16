@@ -158,3 +158,5 @@
 
 - [mobx_codegen](https://pub.dev/packages/mobx_codegen)
 
+- [get](https://pub.dev/packages/get)
+
