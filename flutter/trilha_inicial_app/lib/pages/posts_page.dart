@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/main.dart';
 import 'package:trilha_inicial_app/models/post_model.dart';
 import 'package:trilha_inicial_app/pages/comments_page.dart';
-import 'package:trilha_inicial_app/repositories/posts/impl/post_dio_repository.dart';
 import 'package:trilha_inicial_app/repositories/posts/post_repository.dart';
 
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
@@ -14,7 +14,7 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  late PostRepository postRepository;
+  var postRepository = getIt<PostRepository>();
   var posts = <PostModel>[];
 
   void loadData() async {
@@ -25,7 +25,6 @@ class _PostsPageState extends State<PostsPage> {
   @override
   void initState() {
     super.initState();
-    postRepository = PostDioRepository();
     loadData();
   }
 

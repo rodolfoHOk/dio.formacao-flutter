@@ -160,3 +160,6 @@
 
 - [get](https://pub.dev/packages/get)
 
+- [get_it](https://pub.dev/packages/get_it)
+
+

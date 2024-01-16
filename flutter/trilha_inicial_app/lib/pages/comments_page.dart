@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trilha_inicial_app/main.dart';
 import 'package:trilha_inicial_app/models/comment_model.dart';
 import 'package:trilha_inicial_app/repositories/comments/comments_repository.dart';
-import 'package:trilha_inicial_app/repositories/comments/impl/comment_dio_repository.dart';
 
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 
@@ -15,7 +15,7 @@ class CommentsPage extends StatefulWidget {
 }
 
 class _CommentsPageState extends State<CommentsPage> {
-  late CommentRepository commentRepository;
+  var commentRepository = getIt<CommentRepository>();
   var comments = <CommentModel>[];
 
   void loadData() async {
@@ -26,7 +26,6 @@ class _CommentsPageState extends State<CommentsPage> {
   @override
   void initState() {
     super.initState();
-    commentRepository = CommentDioRepository();
     loadData();
   }
 

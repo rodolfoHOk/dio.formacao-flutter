@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:trilha_inicial_app/main.dart';
 import 'package:trilha_inicial_app/services/state_managers/counter_mobx_service.dart';
 
 // ignore: must_be_immutable
 class CounterMobXPage extends StatelessWidget {
   CounterMobXPage({super.key});
 
-  var counterMobXService = CounterMobXService();
+  var counterMobXService = getIt<CounterMobXService>();
 
   @override
   Widget build(BuildContext context) {
