@@ -1,5 +1,5 @@
 import 'package:trilha_inicial_app/models/comment_model.dart';
-import 'package:trilha_inicial_app/repositories/comments/comments_repository.dart';
+import 'package:trilha_inicial_app/repositories/comments_repository.dart';
 import 'package:trilha_inicial_app/repositories/json_placeholder_custom_dio.dart';
 
 class CommentDioRepository implements CommentRepository {

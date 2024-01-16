@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:trilha_inicial_app/main.dart';
 import 'package:trilha_inicial_app/models/task_list_store.dart';
+import 'package:trilha_inicial_app/shared/widgets/task_item.dart';
 
 // ignore: must_be_immutable
 class TaskMobXPage extends StatelessWidget {
   var descriptionController = TextEditingController(text: "");
 
-  var taskListStore = TaskListStore();
+  var taskListStore = getIt<TaskListStore>();
 
   TaskMobXPage({super.key});
 
@@ -80,25 +82,7 @@ class TaskMobXPage extends StatelessWidget {
                   itemCount: taskListStore.getTasks().length,
                   itemBuilder: (BuildContext builder, int index) {
                     var task = taskListStore.getTasks()[index];
-                    return Observer(builder: (context) {
-                      return Dismissible(
-                        key: Key(task.id),
-                        onDismissed: (DismissDirection direction) async {
-                          taskListStore.remove(task.id);
-                        },
-                        child: ListTile(
-                          title: Text(task.description),
-                          trailing: Switch(
-                            onChanged: (bool value) async {
-                              task.completed = value;
-                              taskListStore.update(
-                                  task.id, task.description, task.completed);
-                            },
-                            value: task.completed,
-                          ),
-                        ),
-                      );
-                    });
+                    return TaskItem(task: task);
                   },
                 );
               }),

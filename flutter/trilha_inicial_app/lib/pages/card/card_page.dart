@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/models/card_detail.dart';
-import 'package:trilha_inicial_app/pages/card_detail_page.dart';
+import 'package:trilha_inicial_app/pages/card/card_detail_page.dart';
+
 import 'package:trilha_inicial_app/repositories/card_detail_repository.dart';
 
 class CardPage extends StatefulWidget {

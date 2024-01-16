@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:trilha_inicial_app/models/post_model.dart';
-import 'package:trilha_inicial_app/repositories/posts/post_repository.dart';
+import 'package:trilha_inicial_app/repositories/post_repository.dart';
 
 class PostHttpRepository implements PostRepository {
   @override

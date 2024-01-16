@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilha_inicial_app/main.dart';
 import 'package:trilha_inicial_app/models/comment_model.dart';
-import 'package:trilha_inicial_app/repositories/comments/comments_repository.dart';
+import 'package:trilha_inicial_app/repositories/comments_repository.dart';
 
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 

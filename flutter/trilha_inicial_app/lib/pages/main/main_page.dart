@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:trilha_inicial_app/pages/card_page.dart';
-import 'package:trilha_inicial_app/pages/image_assets_page.dart';
-import 'package:trilha_inicial_app/pages/list_view_horizontal_page.dart';
-import 'package:trilha_inicial_app/pages/list_view_page.dart';
+import 'package:trilha_inicial_app/pages/card/card_page.dart';
+import 'package:trilha_inicial_app/pages/assets_images/image_assets_page.dart';
+import 'package:trilha_inicial_app/pages/list_view/list_view_horizontal_page.dart';
+import 'package:trilha_inicial_app/pages/list_view/list_view_page.dart';
 import 'package:trilha_inicial_app/pages/tasks/task_sqlite_page.dart';
-import 'package:trilha_inicial_app/pages/cep_query.dart';
+import 'package:trilha_inicial_app/pages/cep/cep_query.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_drawer.dart';
 
