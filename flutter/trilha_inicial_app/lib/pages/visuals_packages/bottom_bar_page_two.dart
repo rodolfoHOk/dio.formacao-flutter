@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trilha_inicial_app/pages/getx/counter_getx_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/counter_getx_page.dart';
+import 'package:trilha_inicial_app/pages/state_managers/task_getx_page.dart';
 import 'package:trilha_inicial_app/shared/widgets/custom_app_bar.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
@@ -29,7 +30,7 @@ class _BottomBarPageTwoState extends State<BottomBarPageTwo>
           controller: tabController,
           children: [
             CounterGetXPage(),
-            Container(color: Colors.green),
+            TaskGetXPage(),
             Container(color: Colors.blue),
             Container(color: Colors.yellow),
             Container(color: Colors.red),

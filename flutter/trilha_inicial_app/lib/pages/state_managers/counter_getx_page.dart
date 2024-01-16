@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trilha_inicial_app/services/counter_get_controller.dart';
+import 'package:trilha_inicial_app/services/state_managers/counter_getx_controller.dart';
 
 // ignore: must_be_immutable
 class CounterGetXPage extends StatelessWidget {

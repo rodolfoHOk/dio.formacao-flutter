@@ -3,6 +3,8 @@
     "autoprefixer",
     "dotenv",
     "Geolocator",
+    "getx",
+    "Getx",
     "mobx",
     "vsync",
     "wifi"
