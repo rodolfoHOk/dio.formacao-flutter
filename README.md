@@ -174,4 +174,3 @@
 
 - [cloud firestore docs](https://firebase.google.com/docs/firestore/quickstart?hl=pt-br)
 
-

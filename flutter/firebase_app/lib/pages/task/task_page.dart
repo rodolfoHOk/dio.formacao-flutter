@@ -2,52 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_app/models/task_model.dart';
 import 'package:flutter/material.dart';
 
-class TaskPage extends StatelessWidget {
+class TaskPage extends StatefulWidget {
   const TaskPage({super.key});
 
   @override
+  State<TaskPage> createState() => _TaskPageState();
+}
+
+class _TaskPageState extends State<TaskPage> {
+  var descriptionController = TextEditingController();
+  var justNotCompleted = false;
+
+  var db = FirebaseFirestore.instance;
+
+  @override
   Widget build(BuildContext context) {
-    var descriptionController = TextEditingController();
-
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          descriptionController.text = "";
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Adicionar tarefa"),
-                content: TextField(
-                  controller: descriptionController,
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Cancelar"),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      var db = FirebaseFirestore.instance;
-                      var task = TaskModel(descriptionController.text, false);
-                      var doc = await db.collection("tasks").add(task.toJson());
-                      debugPrint(doc.id);
-
-                      if (context.mounted) {
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: const Text("Salvar"),
-                  )
-                ],
-              );
-            },
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
       body: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -69,28 +39,60 @@ class TaskPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       Switch(
-                        value: false,
-                        onChanged: (value) {},
+                        value: justNotCompleted,
+                        onChanged: (value) {
+                          justNotCompleted = value;
+                          setState(() {});
+                        },
                       ),
                     ],
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 0,
-                    itemBuilder: (BuildContext builder, int index) {
-                      TaskModel task = TaskModel("teste", false);
-                      return Dismissible(
-                        key: Key("${task.description}-$index"),
-                        onDismissed: (DismissDirection direction) async {},
-                        child: ListTile(
-                          title: Text(task.description),
-                          trailing: Switch(
-                            onChanged: (bool value) async {},
-                            value: task.completed,
-                          ),
-                        ),
-                      );
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: justNotCompleted
+                        ? db
+                            .collection("tasks")
+                            .where('completed', isEqualTo: false)
+                            .snapshots()
+                        : db.collection("tasks").snapshots(),
+                    builder: (context, snapshot) {
+                      return !snapshot.hasData
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : ListView(
+                              children: snapshot.data!.docs.map(
+                                (doc) {
+                                  var taskMap =
+                                      doc.data() as Map<String, dynamic>;
+                                  var task = TaskModel.fromJson(taskMap);
+                                  return Dismissible(
+                                    key: Key(doc.id),
+                                    onDismissed:
+                                        (DismissDirection direction) async {
+                                      await db
+                                          .collection("tasks")
+                                          .doc(doc.id)
+                                          .delete();
+                                    },
+                                    child: ListTile(
+                                      title: Text(task.description),
+                                      trailing: Switch(
+                                        onChanged: (bool value) async {
+                                          task.completed = value;
+                                          await db
+                                              .collection("tasks")
+                                              .doc(doc.id)
+                                              .update(task.toJson());
+                                        },
+                                        value: task.completed,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ).toList(),
+                            );
                     },
                   ),
                 ),
@@ -98,6 +100,41 @@ class TaskPage extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          descriptionController.text = "";
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Adicionar tarefa"),
+                content: TextField(
+                  controller: descriptionController,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancelar"),
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      var task = TaskModel(descriptionController.text, false);
+                      await db.collection("tasks").add(task.toJson());
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text("Salvar"),
+                  )
+                ],
+              );
+            },
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
