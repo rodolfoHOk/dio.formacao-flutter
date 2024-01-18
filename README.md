@@ -174,3 +174,7 @@
 
 - [cloud firestore docs](https://firebase.google.com/docs/firestore/quickstart?hl=pt-br)
 
+- [firebase_remote_config](flutter pub add firebase_remote_config)
+
+- [remote-config docs](https://firebase.google.com/docs/remote-config/get-started?platform=flutter&hl=pt-br)
+
