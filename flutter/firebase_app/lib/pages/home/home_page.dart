@@ -1,5 +1,5 @@
 import 'package:firebase_app/pages/chat/chat_page.dart';
-import 'package:firebase_app/shared/custom_drawer.dart';
+import 'package:firebase_app/shared/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,6 +7,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var roomController = TextEditingController(text: "");
     var nicknameController = TextEditingController(text: "");
 
     return SafeArea(
@@ -21,6 +22,12 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Text("Informe nome da sala"),
+              const SizedBox(height: 8),
+              TextField(
+                controller: roomController,
+              ),
+              const SizedBox(height: 24),
               const Text("Informe seu apelido"),
               const SizedBox(height: 8),
               TextField(
@@ -29,6 +36,20 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
+                  if (roomController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text(
+                          "Nome da sala não pode estar em branco",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
+                    return;
+                  }
                   if (nicknameController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -41,15 +62,16 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     );
-                  } else {
-                    if (context.mounted) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) =>
-                                ChatPage(nickname: nicknameController.text)),
-                      );
-                    }
+                    return;
+                  }
+                  if (context.mounted) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => ChatPage(
+                              room: roomController.text,
+                              nickname: nicknameController.text)),
+                    );
                   }
                 },
                 child: const Text("Entrar no chat"),
