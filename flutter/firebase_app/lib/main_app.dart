@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_app/pages/home/home_page.dart';
+import 'package:firebase_app/pages/splash_screen/splash_screen_page.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
       darkTheme: ThemeData.dark(
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const SplashScreenPage(),
     );
   }
 }

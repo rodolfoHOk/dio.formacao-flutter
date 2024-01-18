@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_app/models/task_model.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_app/models/task_model.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({super.key});
@@ -12,8 +13,21 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   var descriptionController = TextEditingController();
   var justNotCompleted = false;
+  var userId = "";
 
   var db = FirebaseFirestore.instance;
+
+  void loadUser() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    userId = preferences.getString('user_id')!;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadUser();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +67,13 @@ class _TaskPageState extends State<TaskPage> {
                     stream: justNotCompleted
                         ? db
                             .collection("tasks")
+                            .where('user_id', isEqualTo: userId)
                             .where('completed', isEqualTo: false)
                             .snapshots()
-                        : db.collection("tasks").snapshots(),
+                        : db
+                            .collection("tasks")
+                            .where('user_id', isEqualTo: userId)
+                            .snapshots(),
                     builder: (context, snapshot) {
                       return !snapshot.hasData
                           ? const Center(
@@ -81,6 +99,7 @@ class _TaskPageState extends State<TaskPage> {
                                       trailing: Switch(
                                         onChanged: (bool value) async {
                                           task.completed = value;
+                                          task.updatedAt = DateTime.now();
                                           await db
                                               .collection("tasks")
                                               .doc(doc.id)
@@ -121,7 +140,8 @@ class _TaskPageState extends State<TaskPage> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      var task = TaskModel(descriptionController.text, false);
+                      var task =
+                          TaskModel(descriptionController.text, false, userId);
                       await db.collection("tasks").add(task.toJson());
                       if (context.mounted) {
                         Navigator.pop(context);
