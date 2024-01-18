@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "991606466546",
+    "project_id": "hiokdev-flutter-app",
+    "storage_bucket": "hiokdev-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991606466546:android:9f5b731a4d7a7cd565ad6b",
+        "android_client_info": {
+          "package_name": "br.com.hioktec.flutter.firebase.firebase_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByK_TZa--EwZp3hBaGurKp8UZxvFZSxv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991606466546:android:2c26f3a9eee11c8165ad6b",
+        "android_client_info": {
+          "package_name": "br.com.hioktec.trilhaapp.trilha_inicial_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByK_TZa--EwZp3hBaGurKp8UZxvFZSxv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

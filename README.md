@@ -162,4 +162,16 @@
 
 - [get_it](https://pub.dev/packages/get_it)
 
+### Firebase
+
+- [PDF](files/Introdução%20ao%20Firebase.pdf)
+
+- [firebase flutter docs](https://firebase.google.com/docs/flutter/setup?hl=pt-br&platform=android)
+
+- [firebase_core](flutter pub add firebase_core)
+
+- [cloud_firestore](flutter pub add cloud_firestore)
+
+- [cloud firestore docs](https://firebase.google.com/docs/firestore/quickstart?hl=pt-br)
+
 
