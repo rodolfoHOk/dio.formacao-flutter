@@ -178,3 +178,7 @@
 
 - [remote-config docs](https://firebase.google.com/docs/remote-config/get-started?platform=flutter&hl=pt-br)
 
+- [crashlytics docs](https://firebase.google.com/docs/crashlytics/get-started?platform=flutter&hl=pt-br)
+
+- [firebase_crashlytics](flutter pub add firebase_crashlytics)
+
