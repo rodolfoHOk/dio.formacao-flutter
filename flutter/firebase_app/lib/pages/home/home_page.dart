@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_app/pages/chat/chat_page.dart';
 import 'package:firebase_app/shared/widgets/custom_drawer.dart';
-import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,8 +11,13 @@ class HomePage extends StatelessWidget {
     var roomController = TextEditingController(text: "");
     var nicknameController = TextEditingController(text: "");
 
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    debugPrint(remoteConfig.getString("CHAT_TEXT"));
+
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color(int.parse(
+            "0xff${remoteConfig.getString("BACKGROUND_SCREEN_COLOR")}")),
         appBar: AppBar(
           title: const Text("Firebase App"),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -28,7 +34,7 @@ class HomePage extends StatelessWidget {
                 controller: roomController,
               ),
               const SizedBox(height: 24),
-              const Text("Informe seu apelido"),
+              Text(remoteConfig.getString("CHAT_TEXT")),
               const SizedBox(height: 8),
               TextField(
                 controller: nicknameController,
