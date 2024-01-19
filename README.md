@@ -182,7 +182,11 @@
 
 - [firebase_crashlytics](flutter pub add firebase_crashlytics)
 
-- [analytics](https://firebase.google.com/docs/analytics/get-started?platform=flutter&hl=pt-br)
+- [analytics docs](https://firebase.google.com/docs/analytics/get-started?platform=flutter&hl=pt-br)
 
 - [firebase_analytics](flutter pub add firebase_analytics)
+
+- [cloud-messaging docs](https://firebase.google.com/docs/cloud-messaging/flutter/client?hl=pt-br)
+
+- [firebase_messaging](flutter pub add firebase_messaging)
 
