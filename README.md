@@ -190,3 +190,5 @@
 
 - [firebase_messaging](flutter pub add firebase_messaging)
 
+- [Chave de autenticação de APNs para IOS](https://developer.apple.com/help/account/manage-keys/create-a-private-key)
+
