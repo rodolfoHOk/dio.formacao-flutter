@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_app/pages/chat/chat_page.dart';
 import 'package:firebase_app/pages/example/example_page.dart';
 import 'package:firebase_app/pages/task/task_page.dart';
@@ -13,6 +14,7 @@ class CustomDrawer extends StatelessWidget {
     var nicknameController = TextEditingController(text: "");
 
     final remoteConfig = FirebaseRemoteConfig.instance;
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
     return Drawer(
       child: ListView(
@@ -21,23 +23,29 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.verified),
             title: const Text("Exemplo"),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const ExamplePage()),
-              );
+            onTap: () async {
+              await analytics.logEvent(name: "ExamplePage");
+              if (context.mounted) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ExamplePage()),
+                );
+              }
             },
           ),
           ListTile(
             leading: const Icon(Icons.task),
             title: const Text("Tarefas"),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const TaskPage(),
-                ),
-              );
+            onTap: () async {
+              await analytics.logEvent(name: "TaskPage");
+              if (context.mounted) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TaskPage(),
+                  ),
+                );
+              }
             },
           ),
           ListTile(
@@ -73,7 +81,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     actions: [
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (roomController.text.trim().isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -102,6 +110,7 @@ class CustomDrawer extends StatelessWidget {
                             );
                             return;
                           }
+                          await analytics.logEvent(name: "ChatPage");
                           if (context.mounted) {
                             Navigator.pop(context);
                             Navigator.push(
@@ -124,7 +133,8 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.bug_report),
             title: const Text("Crashlytics"),
-            onTap: () {
+            onTap: () async {
+              await analytics.logEvent(name: "ExceptionThrows");
               throw Exception();
             },
           ),

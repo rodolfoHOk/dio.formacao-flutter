@@ -182,3 +182,7 @@
 
 - [firebase_crashlytics](flutter pub add firebase_crashlytics)
 
+- [analytics](https://firebase.google.com/docs/analytics/get-started?platform=flutter&hl=pt-br)
+
+- [firebase_analytics](flutter pub add firebase_analytics)
+

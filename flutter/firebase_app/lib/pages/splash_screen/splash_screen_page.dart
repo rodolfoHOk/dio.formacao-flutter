@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_app/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,8 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   void openHome() async {
+    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+    await analytics.logEvent(name: "SplashScreenOpen");
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     var userId = preferences.getString('user_id');
     if (userId == null) {

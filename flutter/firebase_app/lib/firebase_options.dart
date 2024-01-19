@@ -45,12 +45,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCnRoY8jObZoMADCOzcKl9gtndNIAiIoWw',
-    appId: '1:991606466546:web:ecbd59e121c1ce5365ad6b',
+    appId: '1:991606466546:web:1acf9e0328e47bfb65ad6b',
     messagingSenderId: '991606466546',
     projectId: 'hiokdev-flutter-app',
     authDomain: 'hiokdev-flutter-app.firebaseapp.com',
     storageBucket: 'hiokdev-flutter-app.appspot.com',
-    measurementId: 'G-LHTG1D3EH9',
+    measurementId: 'G-XG9QBFFQ89',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
