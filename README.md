@@ -192,3 +192,14 @@
 
 - [Chave de autenticação de APNs para IOS](https://developer.apple.com/help/account/manage-keys/create-a-private-key)
 
+### Publicando os seus apps Flutter
+
+- [PDF](/files/Publicando%20apps.pdf)
+
+- [Flutter deployment Android](https://docs.flutter.dev/deployment/android)
+
+- keytool -genkey -v -keystore upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias appkey
+
+- flutter build apk
+
+- flutter build appbundle
